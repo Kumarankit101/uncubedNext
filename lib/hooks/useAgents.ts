@@ -41,9 +41,9 @@ export const useAgents = () => {
       'from-pink-500 to-rose-500',
       'from-indigo-500 to-purple-500'
     ];
-    const agentResult = rawAgents.map((agent: any) => ({
+    const agentResult = rawAgents.map((agent: any, index: number) => ({
       ...agent,
-      color: colors[Math.floor(Math.random() * colors.length)],
+      color: colors[index % colors.length],
       icon: (Icons as any)[agent.icon] || Icons.Eye
     }));
     return agentResult
