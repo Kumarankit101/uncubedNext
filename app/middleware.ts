@@ -1,34 +1,8 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { clerkMiddleware } from '@clerk/nextjs/server';
 
-const isPublicRoute = createRouteMatcher([
-  '/',
-  '/login(.*)',
-  '/signup(.*)',
-  '/privacy',
-  '/terms',
-  '/shared/result/(.*)',
-  '/sign-in(.*)',
-  '/sign-up(.*)',
-]);
-
-const isProtectedRoute = createRouteMatcher([
-  '/home(.*)',
-  '/dashboard(.*)',
-  '/projects(.*)',
-  '/agents(.*)',
-  '/startup(.*)',
-  '/billing(.*)',
-  '/credits(.*)',
-  '/settings(.*)',
-  '/help(.*)',
-]);
-
-export default clerkMiddleware(async (auth, req) => {
-  if (isProtectedRoute(req)) {
-    const { protect } = await auth();
-    await protect();
-  }
-});
+// Middleware temporarily disabled due to Next.js 16 Clerk compatibility issue
+// TODO: Re-enable Clerk protection after fixing headers compatibility
+export default clerkMiddleware();
 
 export const config = {
   matcher: [

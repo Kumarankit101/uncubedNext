@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import { useAuthStore } from '@/lib/store/authStore';
 import { useThemeStore } from '@/lib/store/themeStore';
-import { useClerk } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 import { ThemeToggle } from '@/app/components/ui/ThemeToggle';
 import { Logo } from '@/app/components/ui/Logo';
 import { Modal } from '@/app/components/ui/Modal';
@@ -27,10 +27,10 @@ const navigationItems = [
 ];
 
 export const Header: React.FC = () => {
-  const { user } = useAuthStore();
+  const { user, setUser } = useAuthStore();
   const { theme } = useThemeStore();
   const credits = useCredits();
-  const { signOut } = useClerk();
+  const router = useRouter();
   const pathname = usePathname();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -70,14 +70,10 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      setIsDropdownOpen(false);
-      await signOut();
-    } catch (error) {
-      console.error('Logout error:', error);
-      window.location.href = '/';
-    }
+  const handleLogout = () => {
+    setIsDropdownOpen(false);
+    setUser(null);
+    router.push('/');
   };
 
   return (

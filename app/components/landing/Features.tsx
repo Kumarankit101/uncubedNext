@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { useClerk } from '@clerk/nextjs';
 import { useThemeStore } from '@/lib/store/themeStore';
 import BackgroundRays from '@/app/components/BackgroundRays';
 import { Button } from '@/app/components/ui/Button';
-import { useClerkAppearance } from '@/lib/hooks/useClerkAppearance';
+import { useRouter } from 'next/navigation';
 
 const features = [
   {
@@ -36,19 +35,11 @@ const features = [
 
 export const Features: React.FC = () => {
   const { theme } = useThemeStore();
-  const { openSignUp } = useClerk();
-  const getAppearance = useClerkAppearance();
+  const router = useRouter();
   const prefersReducedMotion = useMemo(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches, []);
 
-
-
-
   const handleSignUp = () => {
-    openSignUp({
-      signInUrl: '/login',
-      afterSignUpUrl: '/home',
-      appearance: getAppearance(),
-    });
+    router.push('/sign-up');
   };
 
   return (
