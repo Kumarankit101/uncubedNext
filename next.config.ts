@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   // Disable static generation completely to handle dynamic Clerk/React Query requirements
   output: 'standalone',
+  experimental: {
+    // Suppress warnings about using server-only features in client components
+    // This app is primarily client-side, so we suppress these warnings
+    suppressFeatureNotAvailableWarnings: true,
+  },
   images: {
     remotePatterns: [
       {

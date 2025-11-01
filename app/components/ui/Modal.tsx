@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
@@ -24,8 +26,11 @@ export const Modal: React.FC<ModalProps> = ({
   closeOnBackdrop = true
 }) => {
   const { theme } = useThemeStore();
+  const [mounted, setMounted] = useState(false);
 
-
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const sizes = {
     sm: 'max-w-md',
@@ -41,7 +46,11 @@ export const Modal: React.FC<ModalProps> = ({
     xl: 'max-h-[80vh]'
   };
 
-  return ReactDOM.createPortal(
+  if (!mounted || typeof document === 'undefined') {
+    return null;
+  }
+
+  const modalContent = (
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -97,7 +106,8 @@ export const Modal: React.FC<ModalProps> = ({
           </motion.div>
         </div>
       )}
-    </AnimatePresence>,
-    document.body
+    </AnimatePresence>
   );
+
+  return ReactDOM.createPortal(modalContent, document.body);
 };
