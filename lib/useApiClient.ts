@@ -1,4 +1,4 @@
-import { useAuth } from '@clerk/clerk-react';
+import { useAuth } from '@clerk/nextjs';
 import { useCallback } from 'react';
 import { apiClient } from '@/lib/api';
 
