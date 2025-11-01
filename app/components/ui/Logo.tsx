@@ -11,13 +11,18 @@ interface LogoProps {
 export const Logo: React.FC<LogoProps> = ({ size = 32, className = '' }) => {
   const { theme } = useThemeStore();
 
+  const logoSrc = theme === 'dark' ? LogoLight : LogoDark;
+  const logoUrl = typeof logoSrc === 'string' ? logoSrc : logoSrc.src;
+
   return (
     <div className={`flex items-center justify-center ${className}`}>
-      {theme === 'dark' ? (
-        <img src={LogoLight} alt="Uncubed" style={{ width: size, height: size }} loading="lazy" sizes={`${size}px`} />
-      ) : (
-        <img src={LogoDark} alt="Uncubed" style={{ width: size, height: size }} loading="lazy" sizes={`${size}px`} />
-      )}
+      <img
+        src={logoUrl}
+        alt="Uncubed"
+        style={{ width: size, height: size }}
+        loading="lazy"
+        sizes={`${size}px`}
+      />
     </div>
   );
 };
