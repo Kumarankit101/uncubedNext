@@ -14,12 +14,18 @@ export const Hero = React.memo(() => {
   const { theme } = useThemeStore();
   const [idea, setIdea] = useState('');
   const [selectedAgents, setSelectedAgents] = useState<string[]>([]);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const { agents } = useAgents();
   const landingAgents = useMemo(() => agents.filter(a => featuredAgentIds.includes(a.id)), [agents]);
-  const prefersReducedMotion = useMemo(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setPrefersReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    }
+  }, []);
   
   const { scrollYProgress } = useScroll({
     target: heroRef,

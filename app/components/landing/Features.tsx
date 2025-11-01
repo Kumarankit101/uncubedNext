@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useThemeStore } from '@/lib/store/themeStore';
 import BackgroundRays from '@/app/components/BackgroundRays';
@@ -36,7 +36,13 @@ const features = [
 export const Features: React.FC = () => {
   const { theme } = useThemeStore();
   const router = useRouter();
-  const prefersReducedMotion = useMemo(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches, []);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setPrefersReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    }
+  }, []);
 
   const handleSignUp = () => {
     router.push('/sign-up');
