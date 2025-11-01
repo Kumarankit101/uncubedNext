@@ -1,0 +1,19 @@
+.expanded-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: transparent;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 250ms ease-in-out;
+  opacity: 0;
+  animation: fadeIn 250ms forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
