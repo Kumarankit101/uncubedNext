@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { useAuth } from '@clerk/nextjs';
 import { Navigation } from '@/app/components/landing/Navigation';
 import { Hero } from '@/app/components/landing/Hero';
 import { Features } from '@/app/components/landing/Features';
@@ -12,6 +13,15 @@ import { Footer } from '@/app/components/landing/Footer';
 
 export default function Home() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const { isLoaded, isSignedIn } = useAuth();
+
+  // Redirect logged-in users to home
+  useEffect(() => {
+    if (isLoaded && isSignedIn) {
+      router.push('/home');
+    }
+  }, [isLoaded, isSignedIn, router]);
 
   useEffect(() => {
     // Handle hash-based navigation for smooth scrolling to sections

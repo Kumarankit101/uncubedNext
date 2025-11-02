@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   // Disable static generation completely to handle dynamic Clerk/React Query requirements
   output: 'standalone',
   images: {

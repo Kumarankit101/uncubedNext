@@ -4,10 +4,7 @@ import { Menu, X } from 'lucide-react';
 import { Button } from '@/app/components/ui/Button';
 import { ThemeToggle } from '@/app/components/ui/ThemeToggle';
 import { useRouter, usePathname } from 'next/navigation';
-import Link from 'next/link';
 import { useThemeStore } from '@/lib/store/themeStore';
-import Logo from '@/app/assets/Logo.svg';
-import DarkLogo from '@/app/assets/darkLogo.svg';
 
 export const Navigation = React.memo(() => {
   const [isOpen, setIsOpen] = useState(false);
@@ -109,9 +106,9 @@ export const Navigation = React.memo(() => {
           >
             <div className="w-8 h-8 flex items-center justify-center">
               {theme === 'dark' ? (
-                <img src={Logo} alt="Uncubed" className="w-8 h-8" loading="lazy" sizes="32px" />
+                <img src="/Logo.svg" alt="Uncubed" className="w-8 h-8" loading="lazy" sizes="32px" />
               ) : (
-                <img src={DarkLogo} alt="Uncubed" className="w-8 h-8" loading="lazy" sizes="32px" />
+                <img src="/darkLogo.svg" alt="Uncubed" className="w-8 h-8" loading="lazy" sizes="32px" />
               )}
             </div>
             <span className={`text-xl font-bold bg-clip-text text-transparent ${

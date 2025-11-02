@@ -5,7 +5,6 @@ export const dynamic = 'force-dynamic';
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Star, Zap, Crown, Rocket, Sparkles } from 'lucide-react';
-import { Button } from '@/app/components/ui/Button';
 import SubscribeButton from '@/app/components/SubscribeButton';
 import { Plan } from '@/lib/types';
 import { apiClient } from '@/lib/api';
@@ -83,7 +82,7 @@ const BillingPricing: React.FC = () => {
           <div className="absolute -inset-1 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 rounded-3xl blur opacity-20" />
           <div className="relative backdrop-blur-md rounded-3xl p-12 bg-white/[0.03] border border-white/[0.08]">
             <p className="text-lg leading-relaxed max-w-4xl mx-auto mb-8 text-center text-gray-300">
-              "Select the perfect plan to accelerate your startup journey. All plans include access to our complete AI toolkit with no hidden fees."
+              &quot;Select the perfect plan to accelerate your startup journey. All plans include access to our complete AI toolkit with no hidden fees.&quot;
             </p>
 
             <motion.div

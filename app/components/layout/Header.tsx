@@ -12,6 +12,7 @@ import {
 import { useAuthStore } from '@/lib/store/authStore';
 import { useThemeStore } from '@/lib/store/themeStore';
 import { useRouter } from 'next/navigation';
+import { useAuth, useClerk } from '@clerk/nextjs';
 import { ThemeToggle } from '@/app/components/ui/ThemeToggle';
 import { Logo } from '@/app/components/ui/Logo';
 import { Modal } from '@/app/components/ui/Modal';
@@ -32,6 +33,7 @@ export const Header: React.FC = () => {
   const credits = useCredits();
   const router = useRouter();
   const pathname = usePathname();
+  const { signOut } = useClerk();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -70,9 +72,10 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setIsDropdownOpen(false);
     setUser(null);
+    await signOut();
     router.push('/');
   };
 

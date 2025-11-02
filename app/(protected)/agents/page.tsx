@@ -2,7 +2,7 @@
 
 export const dynamic = 'force-dynamic';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
 import { AgentGrid } from '@/app/components/agents/AgentGrid';
@@ -10,7 +10,7 @@ import { AgentModal } from '@/app/components/agents/AgentModal';
 import { AgentDetailModal } from '@/app/components/dashboard/AgentDetailModal';
 import { ProjectSelector } from '@/app/components/dashboard/ProjectSelector';
 import { CreateProjectModal } from '@/app/components/CreateProjectModal';
-import { useProjects } from '@/lib/hooks/useProjects';
+import { useProjects, type Project } from '@/lib/hooks/useProjects';
 import { useAgents } from '@/lib/hooks/useAgents';
 import { useThemeStore } from '@/lib/store/themeStore';
 import type { ProjectFormData } from '@/app/components/EditProjectModal';
@@ -18,7 +18,8 @@ import type { ProjectFormData } from '@/app/components/EditProjectModal';
 export default function Agents() {
   const searchParams = useSearchParams();
   const [selectedAgentId, setSelectedAgentId] = useState<string | null>(null);
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const initializedRef = useRef(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isProjectSelectorOpen, setIsProjectSelectorOpen] = useState(false);
   const [selectedDetailAgent, setSelectedDetailAgent] = useState<string | null>(null);
@@ -30,17 +31,21 @@ export default function Agents() {
 
   // Handle pre-selected project from URL query params
   useEffect(() => {
+    if (initializedRef.current || projects.length === 0) return;
+
     const projectId = searchParams.get('projectId');
-    if (projectId && projects.length > 0) {
+    if (projectId) {
       const project = projects.find(p => p.id === projectId);
       if (project) {
         setSelectedProject(project);
+        initializedRef.current = true;
       }
-    } else if (projects.length > 0 && !selectedProject) {
+    } else if (!selectedProject) {
       // Auto-select first project if none selected
       setSelectedProject(projects[0]);
+      initializedRef.current = true;
     }
-  }, [searchParams, projects, selectedProject]);
+  }, [searchParams, projects]);
 
   const handleAgentSelect = (agentId: string) => {
     if (!selectedProject) {
@@ -129,7 +134,7 @@ export default function Agents() {
           <ProjectSelector
             selectedProject={selectedProject}
             projects={projects}
-            onProjectSelect={setSelectedProject}
+            onProjectSelect={(project) => setSelectedProject(project)}
             onCreateProject={handleCreateProject}
             isOpen={isProjectSelectorOpen}
             onToggle={() => setIsProjectSelectorOpen(!isProjectSelectorOpen)}

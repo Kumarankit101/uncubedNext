@@ -30,19 +30,5 @@ export const useThemeStore = create<ThemeStore>()(
   )
 );
 
-// Initialize theme on app start
-if (typeof window !== 'undefined') {
-  const storedTheme = localStorage.getItem('theme-storage');
-  if (storedTheme) {
-    try {
-      const parsed = JSON.parse(storedTheme);
-      document.documentElement.classList.toggle('dark', parsed.state.theme === 'dark');
-    } catch (e) {
-      // Fallback to light theme
-      document.documentElement.classList.remove('dark');
-    }
-  } else {
-    // Default to light theme
-    document.documentElement.classList.remove('dark');
-  }
-}
+// Theme initialization should be done in a client component to avoid hydration issues
+// See ThemeInitializer component in app/components/ThemeInitializer.tsx

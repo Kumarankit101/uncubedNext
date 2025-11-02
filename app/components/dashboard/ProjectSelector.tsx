@@ -3,12 +3,7 @@ import { motion } from 'framer-motion';
 import { FolderOpen, Plus, ChevronDown } from 'lucide-react';
 import { Button } from '@/app/components/ui/Button';
 import { useThemeStore } from '@/lib/store/themeStore';
-
-interface Project {
-  id: string;
-  startupName: string;
-  description: string;
-}
+import type { Project } from '@/lib/hooks/useProjects';
 
 interface ProjectSelectorProps {
   selectedProject: Project | null;
