@@ -5,6 +5,8 @@ import { Button } from '@/app/components/ui/Button';
 import { ThemeToggle } from '@/app/components/ui/ThemeToggle';
 import { useRouter, usePathname } from 'next/navigation';
 import { useThemeStore } from '@/lib/store/themeStore';
+import { useClerk } from '@clerk/nextjs';
+import { useClerkAppearance } from '@/lib/hooks/useClerkAppearance';
 
 export const Navigation = React.memo(() => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +14,8 @@ export const Navigation = React.memo(() => {
   const router = useRouter();
   const pathname = usePathname();
   const { theme } = useThemeStore();
+  const { openSignIn, openSignUp } = useClerk();
+  const getAppearance = useClerkAppearance();
 
   // Throttle function
   const throttle = (func: (...args: any[]) => void, limit: number) => {
@@ -68,12 +72,20 @@ export const Navigation = React.memo(() => {
 
 
   const handleSignIn = () => {
-    router.push('/sign-in');
+    openSignIn({
+      signUpUrl: '/sign-up',
+      afterSignInUrl: '/home',
+      appearance: getAppearance(),
+    });
     setIsOpen(false);
   };
 
   const handleSignUp = () => {
-    router.push('/sign-up');
+    openSignUp({
+      signInUrl: '/sign-in',
+      afterSignUpUrl: '/home',
+      appearance: getAppearance(),
+    });
     setIsOpen(false);
   };
 

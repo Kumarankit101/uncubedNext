@@ -23,17 +23,12 @@ const nextConfig: NextConfig = {
         destination: '/home',
         permanent: true,
       },
+      {
+        source: '/diy/:path*',
+        destination: 'https://diy-dng7d9dbftdvahb8.eastus-01.azurewebsites.net/diy/:path*',
+        permanent: false,
+      },
     ];
-  },
-  async rewrites() {
-    return {
-      beforeFiles: [
-        {
-          source: '/diy/:path*',
-          destination: 'https://diy-dng7d9dbftdvahb8.eastus-01.azurewebsites.net/diy/:path*',
-        },
-      ],
-    };
   },
   // Temporarily disabled headers due to Next.js 16 compatibility issue
   // async headers() {
