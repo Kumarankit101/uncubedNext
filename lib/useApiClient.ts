@@ -7,7 +7,7 @@ export function useApiClient() {
 
   // callApi(endpoint, options) always attaches latest Clerk token
   const callApi = useCallback(<T,>(endpoint: string, options: RequestInit = {}): Promise<T> => {
-    return getToken().then(token => apiClient.request<T>(endpoint, options, token));
+    return getToken().then((token: string | null) => apiClient.request<T>(endpoint, options, token));
   }, [getToken]);
   return { callApi };
 }

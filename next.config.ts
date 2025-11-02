@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   // Disable static generation completely to handle dynamic Clerk/React Query requirements
-  output: 'standalone',
+  // output: 'stan/dalone',
   images: {
     remotePatterns: [
       {
