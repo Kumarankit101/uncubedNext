@@ -252,7 +252,7 @@ export default function Dashboard() {
         >
           <span className={`block ${theme === 'dark' ? 'text-white' : 'text-light-900'
             }`}>
-            The fastest way to your startup.
+            Think it. Build it. Launch it.
           </span>
         </motion.h1>
         <motion.p
