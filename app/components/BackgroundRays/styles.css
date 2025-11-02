@@ -9,35 +9,35 @@
   --ray-gradient-secondary: radial-gradient(var(--ray-color-secondary) 0%, transparent 70%);
   --ray-gradient-accent: radial-gradient(var(--ray-color-accent) 0%, transparent 70%);
 
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  animation: fadeIn 1.5s ease-out;
-  pointer-events: none;
-  z-index: 0;
+   position: fixed;
+   inset: 0;
+   overflow: hidden;
+   animation: fadeIn 1.5s ease-out;
+   pointer-events: none;
+   z-index: 0;
 
-  .dark & {
-    mix-blend-mode: screen;
-  }
+   .dark & {
+     mix-blend-mode: screen;
+   }
 
-  .light & {
-    mix-blend-mode: multiply;
-  }
-}
+   .light & {
+     mix-blend-mode: multiply;
+   }
+ }
 
-.lightRay {
-  position: absolute;
-  border-radius: 100%;
+ .lightRay {
+   position: absolute;
+   border-radius: 100%;
 
-  .dark & {
-    mix-blend-mode: screen;
-  }
+   .dark & {
+     mix-blend-mode: screen;
+   }
 
-  .light & {
-    mix-blend-mode: multiply;
-    opacity: 0.4;
-  }
-}
+   .light & {
+     mix-blend-mode: multiply;
+     opacity: 0.4;
+   }
+ }
 
 .ray1 {
   width: 600px;

@@ -28,7 +28,6 @@ export const Hero = React.memo(() => {
   }, []);
   
   const { scrollYProgress } = useScroll({
-    target: heroRef,
     offset: ["start start", "end start"]
   });
   
