@@ -54,7 +54,6 @@ jobs:
           cd deploy
 
           echo "Installing production dependencies (omit dev)..."
-          # Ensure production packages (including next) are installed into deploy/node_modules
           npm ci --omit=dev
 
           echo "Sanity check: list node_modules and .bin..."
@@ -71,7 +70,6 @@ jobs:
           echo "Creating node_modules.tar.gz for Azure startup extraction..."
           tar -czf node_modules.tar.gz node_modules
 
-          # Keep the node_modules.tar.gz in deploy alongside build artifacts
           cd ..
 
           echo "✅ Deployment folder ready with production dependencies"
@@ -90,22 +88,27 @@ jobs:
       contents: read
 
     steps:
-      - name: Download artifact from build job
+      - name: Download artifact from build job into ./deploy
         uses: actions/download-artifact@v4
         with:
           name: node-app
-          path: .
+          path: deploy   # <-- download into a directory named `deploy`
 
       - name: Inspect downloaded deploy folder (debug)
         run: |
+          set -euo pipefail
+          echo "Listing top-level working directory:"
+          ls -la
           echo "Contents of downloaded deploy/"
-          ls -la deploy
-          echo "Top-level files:"
-          ls -la deploy | sed -n '1,200p'
+          ls -la deploy || true
+
+          echo "Top-level files inside deploy:"
+          ls -la deploy | sed -n '1,200p' || true
+
           echo "Check for node_modules.tar.gz:"
           if [ -f deploy/node_modules.tar.gz ]; then
             echo "node_modules.tar.gz present"
-            tar -tzf deploy/node_modules.tar.gz | head -n 20 || true
+            tar -tzf deploy/node_modules.tar.gz | head -n 40 || true
           else
             echo "WARNING: node_modules.tar.gz not found!"
             ls -la deploy || true
@@ -120,22 +123,21 @@ jobs:
 
       - name: Configure Azure App Service settings
         run: |
-          # Ensure Azure doesn't attempt to rebuild during deployment since we packaged production node_modules
           az webapp config appsettings set \
             --name uncubed \
             --resource-group frontend_diy \
             --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false WEBSITE_NODE_DEFAULT_VERSION=22.x
 
-          # Set startup file to run the installed next: uses the 'next' from extracted node_modules
           az webapp config set \
             --name uncubed \
             --resource-group frontend_diy \
             --startup-file "npm run start"
         shell: bash
 
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure Web App (deploy/ package)
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'uncubed'
           slot-name: 'Production'
-          package: .
+          package: './deploy'   # point to the deploy folder
+
