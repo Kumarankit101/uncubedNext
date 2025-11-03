@@ -1,6 +1,3 @@
-# =======================================
-# GitHub Actions: Next.js → Azure Web App
-# =======================================
 name: Build and deploy Next.js app to Azure Web App - uncubed
 
 on:
@@ -33,17 +30,20 @@ jobs:
 
       - name: Install dependencies and build app
         run: |
+          set -euo pipefail
           npm ci
           npm run build
           echo "✅ Build complete"
 
-      # Package production files for deployment
       - name: Prepare deployment package
         run: |
+          set -euo pipefail
+          echo "Creating deploy/ folder and copying production assets..."
+          rm -rf deploy || true
           mkdir deploy
 
           # Copy core build output
-          cp -R .next public package.json package-lock.json deploy/
+          cp -R .next public package.json package-lock.json deploy/ || true
 
           # Include config files if they exist
           [ -f next.config.js ] && cp next.config.js deploy/
@@ -52,7 +52,26 @@ jobs:
 
           # Move into deploy folder and install production deps
           cd deploy
+
+          echo "Installing production dependencies (omit dev)..."
+          # Ensure production packages (including next) are installed into deploy/node_modules
           npm ci --omit=dev
+
+          echo "Sanity check: list node_modules and .bin..."
+          ls -la node_modules || true
+          ls -la node_modules/.bin || true
+
+          if [ ! -x node_modules/.bin/next ] && [ ! -f node_modules/.bin/next ]; then
+            echo "ERROR: 'next' binary not found in deploy/node_modules/.bin" >&2
+            echo "Listing deploy/node_modules for debugging:"
+            ls -la node_modules || true
+            exit 1
+          fi
+
+          echo "Creating node_modules.tar.gz for Azure startup extraction..."
+          tar -czf node_modules.tar.gz node_modules
+
+          # Keep the node_modules.tar.gz in deploy alongside build artifacts
           cd ..
 
           echo "✅ Deployment folder ready with production dependencies"
@@ -77,6 +96,21 @@ jobs:
           name: node-app
           path: .
 
+      - name: Inspect downloaded deploy folder (debug)
+        run: |
+          echo "Contents of downloaded deploy/"
+          ls -la deploy
+          echo "Top-level files:"
+          ls -la deploy | sed -n '1,200p'
+          echo "Check for node_modules.tar.gz:"
+          if [ -f deploy/node_modules.tar.gz ]; then
+            echo "node_modules.tar.gz present"
+            tar -tzf deploy/node_modules.tar.gz | head -n 20 || true
+          else
+            echo "WARNING: node_modules.tar.gz not found!"
+            ls -la deploy || true
+          fi
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -86,11 +120,13 @@ jobs:
 
       - name: Configure Azure App Service settings
         run: |
+          # Ensure Azure doesn't attempt to rebuild during deployment since we packaged production node_modules
           az webapp config appsettings set \
             --name uncubed \
             --resource-group frontend_diy \
             --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false WEBSITE_NODE_DEFAULT_VERSION=22.x
 
+          # Set startup file to run the installed next: uses the 'next' from extracted node_modules
           az webapp config set \
             --name uncubed \
             --resource-group frontend_diy \
