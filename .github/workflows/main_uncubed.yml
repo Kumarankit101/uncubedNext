@@ -1,7 +1,6 @@
-# ================================
-# GitHub Actions: Next.js → Azure
-# ================================
-
+# =======================================
+# GitHub Actions: Next.js → Azure Web App
+# =======================================
 name: Build and deploy Next.js app to Azure Web App - uncubed
 
 on:
@@ -42,14 +41,21 @@ jobs:
       - name: Prepare deployment package
         run: |
           mkdir deploy
-          cp -R .next public package.json next.config.ts deploy/
 
-          # Install production dependencies only
+          # Copy core build output
+          cp -R .next public package.json package-lock.json deploy/
+
+          # Include config files if they exist
+          [ -f next.config.js ] && cp next.config.js deploy/
+          [ -f next.config.ts ] && cp next.config.ts deploy/
+          [ -f ecosystem.config.js ] && cp ecosystem.config.js deploy/
+
+          # Move into deploy folder and install production deps
           cd deploy
           npm ci --omit=dev
           cd ..
 
-          echo "✅ Deployment folder ready"
+          echo "✅ Deployment folder ready with production dependencies"
 
       - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
@@ -78,7 +84,6 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_78845E77C6F84E66BEF82E1B3281998D }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_781FD260D1334AF991DCE6328379B87E }}
 
-      # Configure the web app to skip Oryx build and use correct Node version
       - name: Configure Azure App Service settings
         run: |
           az webapp config appsettings set \
@@ -92,7 +97,6 @@ jobs:
             --startup-file "npm run start"
         shell: bash
 
-      # Deploy directly to the Production slot
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
