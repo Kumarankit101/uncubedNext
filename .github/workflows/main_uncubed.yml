@@ -1,5 +1,5 @@
 # Docs: https://github.com/Azure/webapps-deploy
-# Node.js (Next.js) app deployment for Azure Web App
+# Production-ready Next.js (Node SSR) deploy to Azure App Service
 
 name: Build and deploy Next.js app to Azure Web App - uncubed
 
@@ -35,6 +35,7 @@ jobs:
         run: |
           npm ci
           npm run build
+          echo "✅ Build completed"
 
       - name: Prepare deployment package
         run: |
@@ -43,6 +44,7 @@ jobs:
           if [ -f next.config.js ]; then cp next.config.js deploy/; fi
           if [ -f ecosystem.config.js ]; then cp ecosystem.config.js deploy/; fi
           cp -R node_modules deploy/
+          echo "✅ Deployment package prepared"
 
       - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
@@ -70,6 +72,20 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8AFFC92F934A4807803FDEFB0F6C818F }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_78845E77C6F84E66BEF82E1B3281998D }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_781FD260D1334AF991DCE6328379B87E }}
+
+      # 🚫 Disable Oryx build and enforce correct Node version
+      - name: Configure Azure App Service settings
+        run: |
+          az webapp config appsettings set \
+            --name uncubed \
+            --resource-group frontend_diy \
+            --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false WEBSITE_NODE_DEFAULT_VERSION=22.x
+
+          az webapp config set \
+            --name uncubed \
+            --resource-group frontend_diy \
+            --startup-file "npm run start"
+        shell: bash
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
