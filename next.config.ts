@@ -6,6 +6,13 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  webpack: (config) => {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      canvas: false,
+    };
+    return config;
+  },
   // Disable static generation completely to handle dynamic Clerk/React Query requirements
   // output: 'stan/dalone',
   images: {
