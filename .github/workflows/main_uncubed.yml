@@ -12,9 +12,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: uncubedNext
     permissions:
-      contents: read #This is required for actions/checkout
+      contents: read
 
+    env:
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+      NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
+      ADMIN_EMAILS: ${{ vars.ADMIN_EMAILS }}
+      
     steps:
       - uses: actions/checkout@v4
 
