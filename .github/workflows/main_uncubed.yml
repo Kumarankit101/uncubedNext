@@ -42,7 +42,7 @@ jobs:
       - name: Prepare deployment package
         run: |
           mkdir deploy
-          cp -R .next public package.json next.config.js deploy/
+          cp -R .next public package.json next.config.ts deploy/
 
           # Install production dependencies only
           cd deploy
