@@ -2,8 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/app/components/ui/Card';
 import { Button } from '@/app/components/ui/Button';
-import { HelpCircle } from 'lucide-react';
-import * as Icons from 'lucide-react';
+import { HelpCircle, Box } from 'lucide-react';
 import { useThemeStore } from '@/lib/store/themeStore';
 import { Agent } from '@/lib/hooks/useAgents';
 
@@ -31,7 +30,7 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ onAgentSelect, onAgentDeta
         <div className={`w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 ${
           theme === 'dark' ? 'bg-gray-500/20' : 'bg-light-300/30'
         }`}>
-          <Icons.Box className={`w-8 h-8 ${
+          <Box className={`w-8 h-8 ${
             theme === 'dark' ? 'text-gray-400' : 'text-light-500'
           }`} />
         </div>

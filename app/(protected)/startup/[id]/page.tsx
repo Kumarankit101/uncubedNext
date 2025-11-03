@@ -3,6 +3,7 @@
 export const dynamic = 'force-dynamic';
 
 import React, { useState, useEffect, useRef, useCallback, Suspense } from 'react';
+import nextDynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import {
@@ -36,13 +37,13 @@ import { EditProjectModal } from '@/app/components/EditProjectModal';
 import type { ProjectFormData } from '@/app/components/EditProjectModal';
 import type { Competitor } from '@/app/components/StartupResults/CompetitorFinderAgentResult';
 
-const MarketResearchAgentResult = React.lazy(() => import('@/app/components/StartupResults/MarketResearchAgentResult').then(module => ({ default: module.MarketResearchAgentResult })));
-const PitchDeckGeneratorResult = React.lazy(() => import('@/app/components/StartupResults/PitchDeckGeneratorResult').then(module => ({ default: module.PitchDeckGeneratorResult })));
-const AppBuilder = React.lazy(() => import('@/app/components/StartupResults/AppBuilder').then(module => ({ default: module.AppBuilder })));
-const CompetitorFinderAgentResult = React.lazy(() => import('@/app/components/StartupResults/CompetitorFinderAgentResult').then(module => ({ default: module.CompetitorFinderAgentResult })));
-const CompetitorSidePanel = React.lazy(() => import('@/app/components/StartupResults/CompetitorSidePanel').then(module => ({ default: module.CompetitorSidePanel })));
-const FeaturePrioritizerResult = React.lazy(() => import('@/app/components/StartupResults/FeaturePrioritizerResult').then(module => ({ default: module.FeaturePrioritizerResult })));
-const LaunchDirectory = React.lazy(() => import('@/app/components/StartupResults/LaunchDirectory').then(module => ({ default: module.LaunchDirectory })));
+const MarketResearchAgentResult = nextDynamic(() => import('@/app/components/StartupResults/MarketResearchAgentResult').then(module => ({ default: module.MarketResearchAgentResult })), { ssr: false, loading: () => <div className="flex items-center justify-center p-8"><Loader2 className="animate-spin w-6 h-6" /></div> });
+const PitchDeckGeneratorResult = nextDynamic(() => import('@/app/components/StartupResults/PitchDeckGeneratorResult').then(module => ({ default: module.PitchDeckGeneratorResult })), { ssr: false, loading: () => <div className="flex items-center justify-center p-8"><Loader2 className="animate-spin w-6 h-6" /></div> });
+const AppBuilder = nextDynamic(() => import('@/app/components/StartupResults/AppBuilder').then(module => ({ default: module.AppBuilder })), { ssr: false, loading: () => <div className="flex items-center justify-center p-8"><Loader2 className="animate-spin w-6 h-6" /></div> });
+const CompetitorFinderAgentResult = nextDynamic(() => import('@/app/components/StartupResults/CompetitorFinderAgentResult').then(module => ({ default: module.CompetitorFinderAgentResult })), { ssr: false, loading: () => <div className="flex items-center justify-center p-8"><Loader2 className="animate-spin w-6 h-6" /></div> });
+const CompetitorSidePanel = nextDynamic(() => import('@/app/components/StartupResults/CompetitorSidePanel').then(module => ({ default: module.CompetitorSidePanel })), { ssr: false, loading: () => <div className="flex items-center justify-center p-8"><Loader2 className="animate-spin w-6 h-6" /></div> });
+const FeaturePrioritizerResult = nextDynamic(() => import('@/app/components/StartupResults/FeaturePrioritizerResult').then(module => ({ default: module.FeaturePrioritizerResult })), { ssr: false, loading: () => <div className="flex items-center justify-center p-8"><Loader2 className="animate-spin w-6 h-6" /></div> });
+const LaunchDirectory = nextDynamic(() => import('@/app/components/StartupResults/LaunchDirectory').then(module => ({ default: module.LaunchDirectory })), { ssr: false, loading: () => <div className="flex items-center justify-center p-8"><Loader2 className="animate-spin w-6 h-6" /></div> });
 import { useThemeStore } from '@/lib/store/themeStore';
 import { Directory } from '@/app/components/StartupResults/LaunchDirectory';
 import { DirectoryModal } from '@/app/components/DirectoryModal';

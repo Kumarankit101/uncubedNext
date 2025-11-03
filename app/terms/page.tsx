@@ -1,26 +1,25 @@
-'use client';
+import type { Metadata } from 'next';
 
-import React from 'react';
-import { useThemeStore } from '@/lib/store/themeStore';
+export const revalidate = 86400;
+
+export const metadata: Metadata = {
+  title: 'Terms of Use - Uncubed',
+  description: 'Read the terms and conditions for using Uncubed, the AI-powered startup co-pilot.',
+  alternates: {
+    canonical: 'https://uncubed.me/terms',
+  },
+};
 
 export default function Terms() {
-  const { theme } = useThemeStore();
-
   return (
-    <div className={`min-h-screen py-20 px-6 ${
-      theme === 'dark' ? 'bg-black text-white' : 'bg-light-50 text-gray-900'
-    }`}>
+    <div className="min-h-screen py-20 px-6 bg-light-50 text-gray-900">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">Terms of Use</h1>
-        <p className={`text-sm mb-8 ${
-          theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-        }`}>
+        <p className="text-sm mb-8 text-gray-600">
           Last updated: October 5, 2025
         </p>
 
-        <div className={`prose prose-lg max-w-none ${
-          theme === 'dark' ? 'prose-invert' : ''
-        }`}>
+        <div className="prose prose-lg max-w-none">
           <p className="mb-6">
             Welcome to Uncubed ("we," "our," "us"). By using Uncubed, you ("you," "your," or "User") agree to the following terms. Please read them carefully. If you do not agree, do not use Uncubed.
           </p>

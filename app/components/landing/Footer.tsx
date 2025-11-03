@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Twitter, Github, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
 import { useThemeStore } from '@/lib/store/themeStore';

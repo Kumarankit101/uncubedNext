@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "analyze": "ANALYZE=true next build",
+    "lighthouse": "npx lighthouse http://localhost:3000 --output=json --output-path=./lighthouse-report.json"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.34.1",
@@ -26,6 +28,7 @@
     "zustand": "^4.5.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.0.1",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^20",
     "@types/react": "^18.3.5",

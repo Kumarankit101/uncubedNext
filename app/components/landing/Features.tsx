@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useMemo, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useThemeStore } from '@/lib/store/themeStore';

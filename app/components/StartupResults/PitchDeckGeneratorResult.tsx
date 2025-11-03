@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { useApiClient } from '@/lib/useApiClient';
 import { Download, ExternalLink } from 'lucide-react';
 import { Button } from '@/app/components/ui/Button';
 import { useThemeStore } from '@/lib/store/themeStore';
-import { Document, Page, pdfjs } from 'react-pdf';
+import dynamic from 'next/dynamic';
+
+// Dynamically import react-pdf components to reduce initial bundle size
+const Document = dynamic(() => import('react-pdf').then(mod => ({ default: mod.Document })), { ssr: false });
+const Page = dynamic(() => import('react-pdf').then(mod => ({ default: mod.Page })), { ssr: false });
+
+// Import CSS statically since dynamic CSS import is not supported
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 
@@ -80,9 +86,13 @@ const PitchDeckGeneratorResult = React.memo<PitchDeckGeneratorResultProps>(({
   const [numPages, setNumPages] = useState<number>();
 
   // Set up PDF.js worker
-  useEffect(() => {
-    pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
-  }, []);
+  // useEffect(() => {
+  //   const setupPdfJs = async () => {
+  //     const { pdfjs } = await import('react-pdf');
+  //     pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
+  //   };
+  //   setupPdfJs();
+  // }, []);
 
   // Step 1: Get SAS URL from backend
   useEffect(() => {

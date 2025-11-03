@@ -1,26 +1,25 @@
-'use client';
+import type { Metadata } from 'next';
 
-import React from 'react';
-import { useThemeStore } from '@/lib/store/themeStore';
+export const revalidate = 86400;
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy - Uncubed',
+  description: 'Learn how Uncubed collects, uses, and protects your personal information.',
+  alternates: {
+    canonical: 'https://uncubed.me/privacy',
+  },
+};
 
 export default function Privacy() {
-  const { theme } = useThemeStore();
-
   return (
-    <div className={`min-h-screen py-20 px-6 ${
-      theme === 'dark' ? 'bg-black text-white' : 'bg-light-50 text-gray-900'
-    }`}>
+    <div className="min-h-screen py-20 px-6 bg-light-50 text-gray-900">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
-        <p className={`text-sm mb-8 ${
-          theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-        }`}>
+        <p className="text-sm mb-8 text-gray-600">
           Last updated: October 5, 2025
         </p>
 
-        <div className={`prose prose-lg max-w-none ${
-          theme === 'dark' ? 'prose-invert' : ''
-        }`}>
+        <div className="prose prose-lg max-w-none">
           <p className="mb-6">
             At Uncubed ("we," "our," or "us"), we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains what information we collect, how we use it, and your rights regarding your data. By using Uncubed, you agree to the practices described here.
           </p>

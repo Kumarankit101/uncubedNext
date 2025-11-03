@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { useThemeStore } from '@/lib/store/themeStore';
 
 interface LogoProps {
@@ -13,12 +14,12 @@ export const Logo: React.FC<LogoProps> = ({ size = 32, className = '' }) => {
   const logoUrl = theme === 'dark' ? '/Logo.svg' : '/darkLogo.svg';
 
   return (
-    <div className={`flex items-center justify-center ${className}`}>
-      <img
+    <div className={`relative ${className}`} style={{ width: size, height: size }}>
+      <Image
         src={logoUrl}
         alt="Uncubed"
-        style={{ width: size, height: size }}
-        loading="lazy"
+        fill
+        objectFit="contain"
         sizes={`${size}px`}
       />
     </div>

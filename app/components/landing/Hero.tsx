@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Plus, CheckCircle } from 'lucide-react';

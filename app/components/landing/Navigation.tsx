@@ -1,12 +1,16 @@
+'use client';
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/app/components/ui/Button';
 import { ThemeToggle } from '@/app/components/ui/ThemeToggle';
 import { useRouter, usePathname } from 'next/navigation';
-import { useThemeStore } from '@/lib/store/themeStore';
+
 import { useClerk } from '@clerk/nextjs';
 import { useClerkAppearance } from '@/lib/hooks/useClerkAppearance';
+import { useThemeStore } from '@/lib/store/themeStore';
+import Image from 'next/image';
 
 export const Navigation = React.memo(() => {
   const [isOpen, setIsOpen] = useState(false);
@@ -116,13 +120,13 @@ export const Navigation = React.memo(() => {
             whileHover={{ scale: 1.05 }}
             onClick={() => handleNavigation('/')}
           >
-            <div className="w-8 h-8 flex items-center justify-center">
-              {theme === 'dark' ? (
-                <img src="/Logo.svg" alt="Uncubed" className="w-8 h-8" loading="lazy" sizes="32px" />
-              ) : (
-                <img src="/darkLogo.svg" alt="Uncubed" className="w-8 h-8" loading="lazy" sizes="32px" />
-              )}
-            </div>
+             <div className="w-8 h-8 relative">
+               {theme === 'dark' ? (
+                 <Image src="/Logo.svg" alt="Uncubed" fill objectFit="contain" sizes="32px" />
+               ) : (
+                 <Image src="/darkLogo.svg" alt="Uncubed" fill objectFit="contain" sizes="32px" />
+               )}
+             </div>
             <span className={`text-xl font-bold bg-clip-text text-transparent ${
               theme === 'dark'
                 ? 'bg-gradient-to-r from-white to-gray-300'

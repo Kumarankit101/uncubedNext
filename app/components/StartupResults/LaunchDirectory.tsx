@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Card } from '@/app/components/../components/ui/Card';
 import { Button } from '@/app/components/../components/ui/Button';
 import { useApiClient } from '@/lib/useApiClient';
@@ -40,9 +41,11 @@ export const DirectoryIcon: React.FC<DirectoryIconProps> = ({ iconurl, name, the
   if (iconurl && !imageError) {
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
     return (
-      <img
+      <Image
         src={`${apiBaseUrl}/directories/proxy-image?url=${encodeURIComponent(iconurl)}`}
         alt={name}
+        width={40}
+        height={40}
         className="w-10 h-10 rounded object-cover"
         onError={() => setImageError(true)}
       />

@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import withBundleAnalyzer from '@next/bundle-analyzer';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -11,7 +12,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: 'uncubed.me',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
       },
     ],
     unoptimized: false,
@@ -30,24 +35,68 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  // Temporarily disabled headers due to Next.js 16 compatibility issue
-  // async headers() {
-  //   return [
-  //     {
-  //       source: '/:path*',
-  //       headers: [
-  //         {
-  //           key: 'Cross-Origin-Embedder-Policy',
-  //           value: 'require-corp',
-  //         },
-  //         {
-  //           key: 'Cross-Origin-Opener-Policy',
-  //           value: 'same-origin',
-  //         },
-  //       ],
-  //     },
-  //   ];
-  // },
+  async headers() {
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    const connectSrc = isDevelopment
+      ? "'self' https://*.clerk.com https://*.clerk.accounts.dev https://*.clerk-telemetry.com https://clerk-telemetry.com https://*.supabase.com https://*.azurewebsites.net http://localhost:3001"
+      : "'self' https://*.clerk.com https://*.clerk.accounts.dev https://*.clerk-telemetry.com https://clerk-telemetry.com https://*.supabase.com https://*.azurewebsites.net";
+
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.com https://*.clerk.accounts.dev https://*.vercel.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src ${connectSrc}; frame-src 'self' https://*.clerk.com https://*.clerk.accounts.dev; worker-src 'self' blob:;`,
+          },
+        ],
+      },
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, no-store, must-revalidate',
+          },
+        ],
+      },
+    ];
+  },
 };
 
-export default nextConfig;
+const withAnalyzer = withBundleAnalyzer({ enabled: process.env.ANALYZE === 'true' });
+
+export default withAnalyzer(nextConfig);

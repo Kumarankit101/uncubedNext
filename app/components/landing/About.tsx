@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Users, Target, Heart, Lightbulb, Rocket } from 'lucide-react';

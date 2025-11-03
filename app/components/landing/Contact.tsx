@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, CheckCircle, ChevronDown } from 'lucide-react';
