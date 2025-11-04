@@ -160,7 +160,7 @@ export const Features: React.FC = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className={`w-full max-w-4xl border rounded-3xl p-4 ${
+                className={`w-full max-w-4xl border rounded-3xl p-2 ${
                   theme === 'dark' ? 'border-white/20' : 'border-black/20'
                 }`}
               >
@@ -228,7 +228,7 @@ export const Features: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className={`border rounded-3xl p-4 ${
+                className={`border rounded-3xl p-2 ${
                   theme === 'dark' ? 'border-white/20' : 'border-black/20'
                 }`}
               >
@@ -258,7 +258,7 @@ export const Features: React.FC = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
-                className={`border rounded-3xl p-4 ${
+                className={`border rounded-3xl p-2 ${
                   theme === 'dark' ? 'border-white/20' : 'border-black/20'
                 }`}
               >
