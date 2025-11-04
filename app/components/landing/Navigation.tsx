@@ -78,7 +78,7 @@ export const Navigation = React.memo(() => {
   const handleSignIn = () => {
     openSignIn({
       signUpUrl: '/sign-up',
-      afterSignInUrl: '/home',
+      fallbackRedirectUrl: '/home',
       appearance: getAppearance(),
     });
     setIsOpen(false);
@@ -87,7 +87,7 @@ export const Navigation = React.memo(() => {
   const handleSignUp = () => {
     openSignUp({
       signInUrl: '/sign-in',
-      afterSignUpUrl: '/home',
+      fallbackRedirectUrl: '/home',
       appearance: getAppearance(),
     });
     setIsOpen(false);

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { Card } from '@/app/components/../components/ui/Card';
 import { Button } from '@/app/components/../components/ui/Button';
 import { useApiClient } from '@/lib/useApiClient';
@@ -37,18 +36,34 @@ interface DirectoryIconProps {
 
 export const DirectoryIcon: React.FC<DirectoryIconProps> = ({ iconurl, name, theme }) => {
   const [imageError, setImageError] = useState(false);
+  const [proxyError, setProxyError] = useState(false);
 
   if (iconurl && !imageError) {
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+    const proxyUrl = `${apiBaseUrl}/directories/proxy-image?url=${encodeURIComponent(iconurl)}`;
+
     return (
-      <Image
-        src={`${apiBaseUrl}/directories/proxy-image?url=${encodeURIComponent(iconurl)}`}
-        alt={name}
-        width={40}
-        height={40}
-        className="w-10 h-10 rounded object-cover"
-        onError={() => setImageError(true)}
-      />
+      <div className="w-10 h-10 rounded overflow-hidden flex items-center justify-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={proxyError ? iconurl : proxyUrl}
+          alt={name}
+          className="w-full h-full object-cover"
+          onError={() => {
+            if (!proxyError) {
+              // Try direct URL if proxy fails
+              setProxyError(true);
+            } else {
+              // Both proxy and direct failed, show fallback
+              setImageError(true);
+            }
+          }}
+          onLoad={() => {
+            // Reset proxy error if it loads successfully
+            setProxyError(false);
+          }}
+        />
+      </div>
     );
   }
 
