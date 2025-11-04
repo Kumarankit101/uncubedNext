@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import withBundleAnalyzer from '@next/bundle-analyzer';
 
 const nextConfig: NextConfig = {
+  experimental: { optimizePackageImports: ['lucide-react'] },
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
@@ -75,10 +76,6 @@ const nextConfig: NextConfig = {
           {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
-          },
-          {
-            key: 'Content-Security-Policy',
-            value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.com https://*.clerk.accounts.dev https://clerk.uncubed.me https://*.vercel.com; style-src 'self' 'unsafe-inline'; img-src *; connect-src ${connectSrc}; frame-src 'self' https://*.clerk.com https://*.clerk.accounts.dev https://diy-dng7d9dbftdvahb8.eastus-01.azurewebsites.net; worker-src 'self' blob:;`,
           },
         ],
       },

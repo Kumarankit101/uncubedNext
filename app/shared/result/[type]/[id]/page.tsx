@@ -13,20 +13,19 @@ export const runtime = 'edge';
 export const revalidate = 300;
 export const dynamicParams = true;
 
+import { serverFetchJSON, TAGS, DEFAULT_REVALIDATE } from '@/lib/server/fetchers';
+
 async function fetchResult(type: string, id: string): Promise<any> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   if (type === 'competitor-finder') {
-    const res = await fetch(`${baseUrl}/competitors/public/${id}`, {
-      next: { revalidate: 300, tags: ['public-competitor', id] }
+    return serverFetchJSON(`/competitors/public/${id}`, {
+      revalidate: DEFAULT_REVALIDATE.publicResult,
+      tags: [TAGS.PUBLIC_COMPETITOR, id],
     });
-    if (!res.ok) throw new Error(res.status === 404 ? 'Result not found' : 'Failed to fetch');
-    return res.json();
   } else {
-    const res = await fetch(`${baseUrl}/outputs/public/${id}`, {
-      next: { revalidate: 300, tags: ['public-result', id] }
+    return serverFetchJSON(`/outputs/public/${id}`, {
+      revalidate: DEFAULT_REVALIDATE.publicResult,
+      tags: [TAGS.PUBLIC_RESULT, id],
     });
-    if (!res.ok) throw new Error(res.status === 404 ? 'Result not found' : 'Failed to fetch');
-    return res.json();
   }
 }
 

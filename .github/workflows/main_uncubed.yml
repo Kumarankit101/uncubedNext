@@ -35,6 +35,20 @@ jobs:
           npm run build
           echo "✅ Build complete"
 
+      - name: Analyze bundles (report only)
+        run: |
+          set -euo pipefail
+          ANALYZE=true npx next build || true
+          echo "Saving bundle analyzer reports"
+
+      - name: Upload analyzer artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-analyzer-reports
+          path: .next/analyze
+          if-no-files-found: ignore
+
+
       - name: Prepare deployment package
         run: |
           set -euo pipefail

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useApiClient } from '@/lib/useApiClient';
 
-export default function useCredits() {
+export default function useCredits(opts?: { initialData?: number }) {
   const { callApi } = useApiClient();
 
   const { data: credits = 0 } = useQuery({
@@ -12,6 +12,7 @@ export default function useCredits() {
     },
     staleTime: 2 * 60 * 1000, // 2 minutes (credits may change more frequently)
     gcTime: 5 * 60 * 1000, // 5 minutes
+    initialData: opts?.initialData,
   });
 
   return credits;

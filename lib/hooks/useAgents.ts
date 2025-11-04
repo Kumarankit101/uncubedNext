@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import * as Icons from 'lucide-react';
+import { Eye, Zap, Brain, Target, TrendingUp, Users, BarChart3, Lightbulb, Rocket, Cog } from 'lucide-react';
 import { useApiClient } from '@/lib/useApiClient';
 
 export interface Agent {
@@ -19,7 +19,20 @@ export interface Agent {
   updatedAt?: string;
 }
 
-export const useAgents = () => {
+const iconMap = {
+  Eye,
+  Zap,
+  Brain,
+  Target,
+  TrendingUp,
+  Users,
+  BarChart3,
+  Lightbulb,
+  Rocket,
+  Cog,
+};
+
+export const useAgents = (opts?: { initialData?: any[] }) => {
   const { callApi } = useApiClient();
   const queryClient = useQueryClient();
 
@@ -31,6 +44,7 @@ export const useAgents = () => {
     },
     staleTime: 10 * 60 * 1000, // 10 minutes
     gcTime: 15 * 60 * 1000, // 15 minutes
+    initialData: opts?.initialData,
   });
 
   const enrichedAgents = useMemo(() => {
@@ -44,7 +58,7 @@ export const useAgents = () => {
     const agentResult = rawAgents.map((agent: any, index: number) => ({
       ...agent,
       color: colors[index % colors.length],
-      icon: (Icons as any)[agent.icon] || Icons.Eye
+      icon: (iconMap as any)[agent.icon] || Eye
     }));
     return agentResult
   }, [rawAgents]);

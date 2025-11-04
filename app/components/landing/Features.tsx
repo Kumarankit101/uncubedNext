@@ -6,6 +6,7 @@ import { useThemeStore } from '@/lib/store/themeStore';
 import BackgroundRays from '@/app/components/BackgroundRays';
 import { Button } from '@/app/components/ui/Button';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const features = [
   {
@@ -139,14 +140,18 @@ export const Features: React.FC = () => {
              <Button className="px-6 py-3 text-lg" onClick={handleSignUp}>Start Building</Button>
           </div>
 
-        {/* Sample app visual */}
-        <div className="flex justify-center md:justify-end">
-          <motion.img
-                src={theme === 'dark' ? `/images/black/feature-1.webp` : `/images/white/feature-1.webp`}
-                alt="Sample App Interface"
-                className={`rounded-xl border ${theme === 'dark' ? 'border-white' : 'border-black'} w-full max-w-2xl object-contain`}
-              />
-        </div>
+         {/* Sample app visual */}
+         <div className="flex justify-center md:justify-end">
+           <motion.div className={`rounded-xl border ${theme === 'dark' ? 'border-white' : 'border-black'} w-full max-w-2xl relative overflow-hidden`} style={{ height: '400px' }}>
+             <Image
+               src={theme === 'dark' ? `/images/black/feature-1.webp` : `/images/white/feature-1.webp`}
+               alt="Sample App Interface"
+               fill
+               className="object-contain"
+               sizes="(max-width: 768px) 100vw, 50vw"
+             />
+           </motion.div>
+         </div>
       </motion.div>
         
   
@@ -163,20 +168,23 @@ export const Features: React.FC = () => {
               viewport={{ once: true }}
               className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
             >
-               {!isEven && (
-                 <div className="flex justify-center">
-                   <motion.img
-                                        src={
-                                          theme === 'dark'
-                                            ? `/images/black/feature-${feature.imageIndex}.webp`
-                                            : `/images/white/feature-${feature.imageIndex}.webp`
-                                        }
-                                        alt={feature.title}
-                                        className={`rounded-xl border ${theme === 'dark' ? 'border-white' : 'border-black'} w-full max-w-2xl object-contain`}
-                       
-                   />
-                 </div>
-               )}
+                {!isEven && (
+                  <div className="flex justify-center">
+                    <motion.div className={`rounded-xl border ${theme === 'dark' ? 'border-white' : 'border-black'} w-full max-w-2xl relative overflow-hidden`} style={{ height: '400px' }}>
+                      <Image
+                        src={
+                          theme === 'dark'
+                            ? `/images/black/feature-${feature.imageIndex}.webp`
+                            : `/images/white/feature-${feature.imageIndex}.webp`
+                        }
+                        alt={feature.title}
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </motion.div>
+                  </div>
+                )}
               <div
                 className={`text-center md:text-left ${
                   !isEven ? 'md:pl-8' : 'md:pr-8'
@@ -203,20 +211,23 @@ export const Features: React.FC = () => {
                    {feature.description}
                  </p>
               </div>
-               {isEven && (
-                 <div className="flex justify-center">
-                   <motion.img
-                                        src={
-                                          theme === 'dark'
-                                            ? `/images/black/feature-${feature.imageIndex}.webp`
-                                            : `/images/white/feature-${feature.imageIndex}.webp`
-                                        }
-                                        alt={feature.title}
-                                        className={`rounded-xl border ${theme === 'dark' ? 'border-white' : 'border-black'} w-full max-w-2xl object-contain`}
-                       
-                   />
-                 </div>
-               )}
+                 {isEven && (
+                   <div className="flex justify-center">
+                     <motion.div className={`rounded-xl border ${theme === 'dark' ? 'border-white' : 'border-black'} w-full max-w-2xl relative overflow-hidden`} style={{ height: '400px' }}>
+                       <Image
+                         src={
+                           theme === 'dark'
+                             ? `/images/black/feature-${feature.imageIndex}.webp`
+                             : `/images/white/feature-${feature.imageIndex}.webp`
+                         }
+                         alt={feature.title}
+                         fill
+                         className="object-contain"
+                         sizes="(max-width: 768px) 100vw, 50vw"
+                       />
+                     </motion.div>
+                   </div>
+                 )}
             </motion.div>
           );
         })}

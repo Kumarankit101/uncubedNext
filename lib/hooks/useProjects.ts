@@ -19,7 +19,7 @@ export interface Project {
   lastActivity?: string;
 }
 
-export const useProjects = () => {
+export const useProjects = (opts?: { initialData?: Project[] }) => {
   const { callApi } = useApiClient();
   const queryClient = useQueryClient();
 
@@ -29,8 +29,9 @@ export const useProjects = () => {
       const response = (await callApi('/projects')) as { projects: Project[] };
       return response.projects || [];
     },
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 60 * 1000, // 1 minute (align with server revalidate)
     gcTime: 10 * 60 * 1000, // 10 minutes
+    initialData: opts?.initialData,
   });
 
   const createProjectMutation = useMutation({
@@ -46,8 +47,15 @@ export const useProjects = () => {
       const response = (await callApi('/projects', { method: 'POST', body: JSON.stringify(projectData) })) as { project: Project };
       return response.project;
     },
-    onSuccess: () => {
+    onSuccess: (project) => {
       queryClient.invalidateQueries({ queryKey: ['projects'] });
+      const secret = process.env.NEXT_PUBLIC_REVALIDATE_SECRET;
+      if (secret && typeof window !== 'undefined') {
+        try {
+          fetch(`/api/revalidate?token=${secret}&tag=projects`, { method: 'POST' });
+          if (project?.id) fetch(`/api/revalidate?token=${secret}&tag=project:${project.id}`, { method: 'POST' });
+        } catch {}
+      }
     },
   });
 
@@ -68,8 +76,15 @@ export const useProjects = () => {
       const response = (await callApi(`/projects/${id}`, { method: 'PUT', body: JSON.stringify(projectData) })) as { project: Project };
       return response.project;
     },
-    onSuccess: () => {
+    onSuccess: (project) => {
       queryClient.invalidateQueries({ queryKey: ['projects'] });
+      const secret = process.env.NEXT_PUBLIC_REVALIDATE_SECRET;
+      if (secret && typeof window !== 'undefined') {
+        try {
+          fetch(`/api/revalidate?token=${secret}&tag=projects`, { method: 'POST' });
+          if (project?.id) fetch(`/api/revalidate?token=${secret}&tag=project:${project.id}`, { method: 'POST' });
+        } catch {}
+      }
     },
   });
 
@@ -77,8 +92,15 @@ export const useProjects = () => {
     mutationFn: async (id: string) => {
       await callApi(`/projects/${id}`, { method: 'DELETE' });
     },
-    onSuccess: () => {
+    onSuccess: (_data, id) => {
       queryClient.invalidateQueries({ queryKey: ['projects'] });
+      const secret = process.env.NEXT_PUBLIC_REVALIDATE_SECRET;
+      if (secret && typeof window !== 'undefined') {
+        try {
+          fetch(`/api/revalidate?token=${secret}&tag=projects`, { method: 'POST' });
+          if (id) fetch(`/api/revalidate?token=${secret}&tag=project:${id}`, { method: 'POST' });
+        } catch {}
+      }
     },
   });
 

@@ -4,7 +4,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Providers from "./providers";
 import { ThemeInitializer } from "./components/ThemeInitializer";
 import NextTopLoader from 'nextjs-toploader';
-import RouteTransitions from "./components/RouteTransitions";
 
 export function RootProviders({ children }: { children: React.ReactNode }) {
   return (
@@ -21,9 +20,7 @@ export function RootProviders({ children }: { children: React.ReactNode }) {
           data-testid="route-top-loader"
         />
         <ThemeInitializer />
-        <RouteTransitions>
-          {children}
-        </RouteTransitions>
+        {children}
       </Providers>
     </ClerkProvider>
   );

@@ -11,7 +11,7 @@ export interface Plan {
   isActive: boolean;
 }
 
-export default function usePlans() {
+export default function usePlans(opts?: { initialData?: Plan[] }) {
   const { callApi } = useApiClient();
 
   const { data: plans = [], isLoading: loading, error } = useQuery({
@@ -22,6 +22,7 @@ export default function usePlans() {
     },
     staleTime: 30 * 60 * 1000, // 30 minutes (plans change rarely)
     gcTime: 60 * 60 * 1000, // 1 hour
+    initialData: opts?.initialData,
   });
 
   return {
