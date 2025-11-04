@@ -5,7 +5,8 @@ import { motion } from 'framer-motion';
 import { useThemeStore } from '@/lib/store/themeStore';
 import BackgroundRays from '@/app/components/BackgroundRays';
 import { Button } from '@/app/components/ui/Button';
-import { useRouter } from 'next/navigation';
+import { useClerk } from '@clerk/nextjs';
+import { useClerkAppearance } from '@/lib/hooks/useClerkAppearance';
 import Image from 'next/image';
 
 const features = [
@@ -48,7 +49,8 @@ const allFeatures = [
 
 export const Features: React.FC = () => {
   const { theme } = useThemeStore();
-  const router = useRouter();
+  const { openSignUp } = useClerk();
+  const getAppearance = useClerkAppearance();
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
 
@@ -59,7 +61,11 @@ export const Features: React.FC = () => {
   }, []);
 
   const handleSignUp = () => {
-    router.push('/sign-up');
+    openSignUp({
+      signInUrl: '/sign-in',
+      fallbackRedirectUrl: '/home',
+      appearance: getAppearance(),
+    });
   };
 
   return (
