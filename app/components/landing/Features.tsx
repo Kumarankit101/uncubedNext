@@ -149,8 +149,8 @@ export const Features: React.FC = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className={`w-full max-w-4xl border-2 rounded-3xl p-4 ${
-                  theme === 'dark' ? 'border-white' : 'border-black'
+                className={`w-full max-w-4xl border rounded-3xl p-4 ${
+                  theme === 'dark' ? 'border-white/20' : 'border-black/20'
                 }`}
               >
                 <iframe
