@@ -101,7 +101,7 @@ export const Features: React.FC = () => {
 
        <div className="max-w-7xl mx-auto relative space-y-20">
             <iframe
-              src="https://www.youtube.com/embed/At8lvPFbYIo"
+              src="https://www.youtube-nocookie.com/embed/At8lvPFbYIo"
               className="max-w-4xl w-full aspect-video rounded-2xl border-none mx-auto"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
