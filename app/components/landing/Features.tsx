@@ -222,27 +222,29 @@ export const Features: React.FC = () => {
 
           {/* Right side - Sticky image frame */}
           <div className="hidden md:block">
-            <div className="sticky top-32 h-[500px]">
+            <div className="sticky top-32">
               <motion.div
                 key={activeFeatureIndex}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className={`rounded-xl border ${
-                  theme === 'dark' ? 'border-white' : 'border-black'
-                } w-full h-full relative overflow-hidden`}
+                className={`border rounded-3xl p-4 ${
+                  theme === 'dark' ? 'border-white/20' : 'border-black/20'
+                }`}
               >
-                <Image
-                  src={
-                    theme === 'dark'
-                      ? `/images/black/feature-${allFeatures[activeFeatureIndex].imageIndex}.webp`
-                      : `/images/white/feature-${allFeatures[activeFeatureIndex].imageIndex}.webp`
-                  }
-                  alt={allFeatures[activeFeatureIndex].title}
-                  fill
-                  className="object-contain"
-                  sizes="50vw"
-                />
+                <div className="relative w-full h-[500px] rounded-2xl overflow-hidden">
+                  <Image
+                    src={
+                      theme === 'dark'
+                        ? `/images/black/feature-${allFeatures[activeFeatureIndex].imageIndex}.webp`
+                        : `/images/white/feature-${allFeatures[activeFeatureIndex].imageIndex}.webp`
+                    }
+                    alt={allFeatures[activeFeatureIndex].title}
+                    fill
+                    className="object-contain"
+                    sizes="50vw"
+                  />
+                </div>
               </motion.div>
             </div>
           </div>
@@ -256,21 +258,23 @@ export const Features: React.FC = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
-                className={`rounded-xl border ${
-                  theme === 'dark' ? 'border-white' : 'border-black'
-                } w-full h-[300px] relative overflow-hidden`}
+                className={`border rounded-3xl p-4 ${
+                  theme === 'dark' ? 'border-white/20' : 'border-black/20'
+                }`}
               >
-                <Image
-                  src={
-                    theme === 'dark'
-                      ? `/images/black/feature-${feature.imageIndex}.webp`
-                      : `/images/white/feature-${feature.imageIndex}.webp`
-                  }
-                  alt={feature.title}
-                  fill
-                  className="object-contain"
-                  sizes="100vw"
-                />
+                <div className="relative w-full h-[300px] rounded-2xl overflow-hidden">
+                  <Image
+                    src={
+                      theme === 'dark'
+                        ? `/images/black/feature-${feature.imageIndex}.webp`
+                        : `/images/white/feature-${feature.imageIndex}.webp`
+                    }
+                    alt={feature.title}
+                    fill
+                    className="object-contain"
+                    sizes="100vw"
+                  />
+                </div>
               </motion.div>
             ))}
           </div>
