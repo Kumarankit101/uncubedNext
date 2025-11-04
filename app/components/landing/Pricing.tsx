@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Star, Zap, Crown, Rocket, ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from '@/app/components/ui/Button';
-import { useRouter } from 'next/navigation';
+import { useClerk } from '@clerk/nextjs';
+import { useClerkAppearance } from '@/lib/hooks/useClerkAppearance';
 import SubscribeButton from '@/app/components/SubscribeButton';
 import { useThemeStore } from '@/lib/store/themeStore';
 
@@ -14,11 +15,12 @@ import { apiClient } from '@/lib/api';
 interface PricingProps { subscribe?: boolean; }
 export const Pricing: React.FC<PricingProps> = ({ subscribe = false }) => {
   const { theme } = useThemeStore();
+  const { openSignUp } = useClerk();
+  const getAppearance = useClerkAppearance();
   const [plans, setPlans] = useState<Plan[]>([]);
   useEffect(() => {
     apiClient.getPlans().then(data => setPlans((data as { plans: Plan[] }).plans));
   }, []);
-  const router = useRouter();
 
 const floatingElements = [
   { icon: Star, delay: 0, duration: 4, x: '10%', y: '20%' },
@@ -213,7 +215,12 @@ const floatingElements = [
                               theme === 'dark'
                                 ? ''
                                 : 'bg-black text-white border-black hover:bg-gray-900 hover:border-gray-900'
-                            }`} onClick={() => router.push('/signup')}
+                            }`}
+                            onClick={() => openSignUp({
+                              signInUrl: '/sign-in',
+                              fallbackRedirectUrl: '/home',
+                              appearance: getAppearance(),
+                            })}
                           >
                           {currentPrice === 0 ? 'Get Started Free' : 'Get Started'}
                           <ArrowRight className="w-4 h-4 ml-2" />
