@@ -78,7 +78,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.com https://*.clerk.accounts.dev https://clerk.uncubed.me https://*.vercel.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src ${connectSrc}; frame-src 'self' https://*.clerk.com https://*.clerk.accounts.dev; worker-src 'self' blob:;`,
+            value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.com https://*.clerk.accounts.dev https://clerk.uncubed.me https://*.vercel.com; style-src 'self' 'unsafe-inline'; img-src *; connect-src ${connectSrc}; frame-src 'self' https://*.clerk.com https://*.clerk.accounts.dev https://diy-dng7d9dbftdvahb8.eastus-01.azurewebsites.net; worker-src 'self' blob:;`,
           },
         ],
       },
