@@ -169,6 +169,7 @@ export const Features: React.FC = () => {
                 className={`w-full max-w-4xl border rounded-3xl p-2 ${
                   theme === 'dark' ? 'border-white/20' : 'border-black/20'
                 }`}
+                style={{ boxShadow: theme === 'dark' ? '0 0 15px rgba(255,255,255,0.15)' : '0 0 15px rgba(0,0,0,0.15)' }}
               >
                 <iframe
                   src="https://www.youtube-nocookie.com/embed/At8lvPFbYIo"
@@ -237,6 +238,7 @@ export const Features: React.FC = () => {
                 className={`border rounded-3xl p-2 ${
                   theme === 'dark' ? 'border-white/20' : 'border-black/20'
                 }`}
+                style={{ boxShadow: theme === 'dark' ? '0 0 15px rgba(255,255,255,0.15)' : '0 0 15px rgba(0,0,0,0.15)' }}
               >
                 <div className="rounded-2xl overflow-hidden">
                   <Image
@@ -268,6 +270,7 @@ export const Features: React.FC = () => {
                 className={`border rounded-3xl p-2 ${
                   theme === 'dark' ? 'border-white/20' : 'border-black/20'
                 }`}
+                style={{ boxShadow: theme === 'dark' ? '0 0 15px rgba(255,255,255,0.15)' : '0 0 15px rgba(0,0,0,0.15)' }}
               >
                 <div className="rounded-2xl overflow-hidden">
                   <Image
