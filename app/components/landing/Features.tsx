@@ -104,14 +104,14 @@ export const Features: React.FC = () => {
             <div className="relative flex justify-center items-center">
               {/* Arrow and Text on Left - Positioned Absolutely */}
               <motion.div
-                className="hidden md:flex flex-col items-center gap-4 absolute left-0 top-1/2 -translate-y-1/2"
+                className="hidden md:flex flex-col items-center gap-4 absolute left-0 top-1/3 -translate-y-1/2"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
               >
                 <h3
-                  className={`text-xl lg:text-2xl font-semibold whitespace-nowrap ${
+                  className={`text-base lg:text-lg font-semibold whitespace-nowrap ${
                     theme === 'dark' ? 'text-white' : 'text-black'
                   }`}
                 >
