@@ -45,8 +45,8 @@ const nextConfig: NextConfig = {
   async headers() {
     const isDevelopment = process.env.NODE_ENV === 'development';
     const connectSrc = isDevelopment
-      ? "'self' https://*.clerk.com https://*.clerk.accounts.dev https://*.clerk-telemetry.com https://clerk-telemetry.com https://*.supabase.com https://*.azurewebsites.net http://localhost:3001"
-      : "'self' https://*.clerk.com https://*.clerk.accounts.dev https://*.clerk-telemetry.com https://clerk-telemetry.com https://*.supabase.com https://*.azurewebsites.net";
+      ? "'self' https://*.clerk.com https://*.clerk.accounts.dev https://clerk.uncubed.me https://*.clerk-telemetry.com https://clerk-telemetry.com https://*.supabase.com https://*.azurewebsites.net http://localhost:3001"
+      : "'self' https://*.clerk.com https://*.clerk.accounts.dev https://clerk.uncubed.me https://*.clerk-telemetry.com https://clerk-telemetry.com https://*.supabase.com https://*.azurewebsites.net";
 
     return [
       {
@@ -78,7 +78,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.com https://*.clerk.accounts.dev https://*.clerk.uncubed.me https://*.vercel.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src ${connectSrc}; frame-src 'self' https://*.clerk.com https://*.clerk.accounts.dev; worker-src 'self' blob:;`,
+            value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.com https://*.clerk.accounts.dev https://clerk.uncubed.me https://*.vercel.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src ${connectSrc}; frame-src 'self' https://*.clerk.com https://*.clerk.accounts.dev; worker-src 'self' blob:;`,
           },
         ],
       },
