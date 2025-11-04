@@ -100,14 +100,13 @@ export const Features: React.FC = () => {
       </div>
 
        <div className="max-w-7xl mx-auto relative space-y-20">
-            <video
-              src="/demo_1080.mp4"
-              controls
+            <iframe
+              src="https://www.youtube.com/embed/At8lvPFbYIo"
               className="max-w-4xl w-full aspect-video rounded-2xl border-none mx-auto"
-              preload="metadata"
-            >
-             Your browser does not support the video tag.
-           </video>
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="Uncubed Demo"
+            />
          {/* Hero Feature Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
