@@ -100,13 +100,49 @@ export const Features: React.FC = () => {
       </div>
 
        <div className="max-w-7xl mx-auto relative space-y-20">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/At8lvPFbYIo"
-              className="max-w-4xl w-full aspect-video rounded-2xl border-none mx-auto"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              title="Uncubed Demo"
-            />
+            {/* Video Section with Arrow */}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
+              {/* Arrow and Text on Left */}
+              <motion.div
+                className="flex flex-col items-center gap-4"
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <h3
+                  className={`text-xl md:text-2xl font-semibold ${
+                    theme === 'dark' ? 'text-white' : 'text-black'
+                  }`}
+                >
+                  uncubed in 1 minute
+                </h3>
+                <Image
+                  src="/arrow.svg"
+                  alt="Arrow pointing to video"
+                  width={120}
+                  height={80}
+                  className={`${theme === 'dark' ? 'invert' : ''} rotate-0 md:rotate-0`}
+                />
+              </motion.div>
+
+              {/* YouTube Video */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="w-full md:w-auto"
+              >
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/At8lvPFbYIo"
+                  className="w-full md:w-[640px] lg:w-[800px] aspect-video rounded-2xl border-none"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title="Uncubed Demo"
+                />
+              </motion.div>
+            </div>
          {/* Hero Feature Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
