@@ -232,7 +232,7 @@ export const Features: React.FC = () => {
                   theme === 'dark' ? 'border-white/20' : 'border-black/20'
                 }`}
               >
-                <div className="relative w-full h-[500px] rounded-2xl overflow-hidden">
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
                   <Image
                     src={
                       theme === 'dark'
@@ -262,7 +262,7 @@ export const Features: React.FC = () => {
                   theme === 'dark' ? 'border-white/20' : 'border-black/20'
                 }`}
               >
-                <div className="relative w-full h-[300px] rounded-2xl overflow-hidden">
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
                   <Image
                     src={
                       theme === 'dark'
