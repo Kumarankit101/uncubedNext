@@ -46,7 +46,7 @@ const nextConfig: NextConfig = {
     const isDevelopment = process.env.NODE_ENV === 'development';
     const connectSrc = isDevelopment
       ? "'self' https://*.clerk.com https://*.clerk.accounts.dev https://clerk.uncubed.me https://*.clerk-telemetry.com https://clerk-telemetry.com https://*.supabase.com https://*.azurewebsites.net http://localhost:3001"
-      : "'self' https://*.clerk.com https://*.clerk.accounts.dev https://clerk.uncubed.me https://*.clerk-telemetry.com https://clerk-telemetry.com https://*.supabase.com https://*.azurewebsites.net";
+      : "'self' https://*.clerk.com https://*.clerk.accounts.dev https://clerk.uncubed.me https://*.clerk-telemetry.com https://clerk-telemetry.com https://*.supabase.com https://*.azurewebsites.net http://localhost:3001";
 
     return [
       {
