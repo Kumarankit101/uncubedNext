@@ -232,7 +232,7 @@ export const Features: React.FC = () => {
                   theme === 'dark' ? 'border-white/20' : 'border-black/20'
                 }`}
               >
-                <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
+                <div className="rounded-2xl overflow-hidden">
                   <Image
                     src={
                       theme === 'dark'
@@ -240,8 +240,9 @@ export const Features: React.FC = () => {
                         : `/images/white/feature-${allFeatures[activeFeatureIndex].imageIndex}.webp`
                     }
                     alt={allFeatures[activeFeatureIndex].title}
-                    fill
-                    className="object-contain"
+                    width={800}
+                    height={600}
+                    className="w-full h-auto"
                     sizes="50vw"
                   />
                 </div>
@@ -262,7 +263,7 @@ export const Features: React.FC = () => {
                   theme === 'dark' ? 'border-white/20' : 'border-black/20'
                 }`}
               >
-                <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
+                <div className="rounded-2xl overflow-hidden">
                   <Image
                     src={
                       theme === 'dark'
@@ -270,8 +271,9 @@ export const Features: React.FC = () => {
                         : `/images/white/feature-${feature.imageIndex}.webp`
                     }
                     alt={feature.title}
-                    fill
-                    className="object-contain"
+                    width={800}
+                    height={600}
+                    className="w-full h-auto"
                     sizes="100vw"
                   />
                 </div>
