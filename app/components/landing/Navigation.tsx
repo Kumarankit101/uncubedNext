@@ -122,9 +122,9 @@ export const Navigation = React.memo(() => {
           >
              <div className="w-8 h-8 relative">
                {theme === 'dark' ? (
-                 <Image src="/Logo.svg" alt="Uncubed" fill objectFit="contain" sizes="32px" />
+                  <Image src="/Logo.svg" alt="Uncubed" fill sizes="32px" style={{ objectFit: 'contain' }} />
                ) : (
-                 <Image src="/darkLogo.svg" alt="Uncubed" fill objectFit="contain" sizes="32px" />
+                  <Image src="/darkLogo.svg" alt="Uncubed" fill sizes="32px" style={{ objectFit: 'contain' }} />
                )}
              </div>
             <span className={`text-xl font-bold bg-clip-text text-transparent ${

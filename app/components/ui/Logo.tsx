@@ -19,8 +19,8 @@ export const Logo: React.FC<LogoProps> = ({ size = 32, className = '' }) => {
         src={logoUrl}
         alt="Uncubed"
         fill
-        objectFit="contain"
         sizes={`${size}px`}
+        style={{ objectFit: 'contain' }}
       />
     </div>
   );

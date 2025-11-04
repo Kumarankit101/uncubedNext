@@ -18,8 +18,10 @@ import { Logo } from '@/app/components/ui/Logo';
 import { Modal } from '@/app/components/ui/Modal';
 import { ContactForm } from '@/app/components/landing/ContactForm';
 import Link from 'next/link';
+import SmoothLink from '@/app/components/navigation/SmoothLink';
 import { usePathname } from 'next/navigation';
 import useCredits from '@/lib/hooks/useCredits';
+import NetworkIndicator from '@/app/components/NetworkIndicator';
 
 const navigationItems = [
   { label: 'Home', path: '/home' },
@@ -114,7 +116,7 @@ export const Header: React.FC = () => {
             {navigationItems.map(item => {
               const isActive = pathname === item.path;
               return (
-                <Link
+                <SmoothLink
                   key={item.path}
                   href={item.path}
                   className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-colors duration-200 font-medium relative group ${
@@ -133,8 +135,9 @@ export const Header: React.FC = () => {
                       isActive ? 'w-full' : 'w-0 group-hover:w-full'
                     }`} />
                   </span>
-                </Link>
-              );
+                </SmoothLink>
+               );
+
             })}
            </nav>
 
@@ -173,7 +176,10 @@ export const Header: React.FC = () => {
                </span>
              </div>
             
-            {/* User Profile Dropdown */}
+             {/* Background network indicator */}
+             <NetworkIndicator />
+
+             {/* User Profile Dropdown */}
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -262,9 +268,10 @@ export const Header: React.FC = () => {
                                  : 'text-light-700 hover:text-light-900 hover:bg-light-200/30'
                              }`}
                            >
-                             <CreditCard className="w-4 h-4" />
-                             <span>Billing</span>
-                           </Link>
+                              <CreditCard className="w-4 h-4" />
+                              <span>Billing</span>
+                            </Link>
+
 
                            <button
                              onClick={() => {
@@ -325,7 +332,7 @@ export const Header: React.FC = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1, duration: 0.2 }}
                   >
-                    <Link
+                    <SmoothLink
                       href={item.path}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 flex-1 justify-end touch-manipulation relative group ${
@@ -348,7 +355,7 @@ export const Header: React.FC = () => {
                           isActive ? 'w-full' : 'w-0 group-hover:w-full'
                         }`} />
                       </span>
-                    </Link>
+                    </SmoothLink>
                   </motion.div>
                 );
               })}

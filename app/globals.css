@@ -145,6 +145,12 @@ button, .touch-target {
     transform: translateZ(0);
     will-change: transform;
   }
+
+  /* Pending link/button visual state */
+  a[data-pending], button[data-pending] {
+    opacity: 0.75;
+    transition: opacity 150ms ease;
+  }
 }
 
 .light ::-webkit-scrollbar {
