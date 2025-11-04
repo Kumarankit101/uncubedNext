@@ -36,10 +36,21 @@ const features = [
   },
 ];
 
+// Add feature-1 for the hero section
+const allFeatures = [
+  {
+    imageIndex: 1,
+    title: 'Turn thoughts into things',
+    description: 'Tell Uncubed your idea, and see it come to life as a full-scale startup researched, designed, and ready to launch.',
+  },
+  ...features,
+];
+
 export const Features: React.FC = () => {
   const { theme } = useThemeStore();
   const router = useRouter();
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -162,129 +173,108 @@ export const Features: React.FC = () => {
                 />
               </motion.div>
             </div>
-         {/* Hero Feature Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
-        >
-          <div className="text-center md:text-left">
-            <motion.h1
-              className=" leading-[1.1] mb-6"
-              style={{ fontSize: 'clamp(28px, 3vw, 60px)', marginTop: '80px' }}
-              initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.3 }}
-            >
-              <span className={`block ${
-                theme === 'dark' ? 'text-white' : 'text-black'
-              }`}>
-                Turn thoughts into things
-              </span>
-            </motion.h1>
-            <p
-              className={`text-lg mb-6 leading-relaxed ${
-                theme === 'dark' ? 'text-gray-400' : 'text-light-600'
-              }`}
-            >
-              Tell Uncubed your idea, and see it come to life as a full-scale startup researched, designed, and ready to launch.
-            </p>
-             <Button className="px-6 py-3 text-lg" onClick={handleSignUp}>Start Building</Button>
+
+        {/* Gap between video and features */}
+        <div className="h-32" />
+
+        {/* Scroll-linked Features Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 relative">
+          {/* Left side - Scrolling text content */}
+          <div className="space-y-32">
+            {allFeatures.map((feature, idx) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                onViewportEnter={() => setActiveFeatureIndex(idx)}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: false, amount: 0.5 }}
+                className="min-h-[400px] flex flex-col justify-center"
+              >
+                <motion.h2
+                  className="leading-[1.1] mb-6"
+                  style={{ fontSize: 'clamp(28px, 3vw, 52px)' }}
+                >
+                  <span className={`block ${
+                    theme === 'dark' ? 'text-white' : 'text-black'
+                  }`}>
+                    {feature.title}
+                  </span>
+                </motion.h2>
+                <p
+                  className={`text-lg leading-relaxed mb-6 ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-light-600'
+                  }`}
+                >
+                  {feature.description}
+                </p>
+                {idx === 0 && (
+                  <Button className="px-6 py-3 text-lg w-fit" onClick={handleSignUp}>
+                    Start Building
+                  </Button>
+                )}
+              </motion.div>
+            ))}
           </div>
 
-         {/* Sample app visual */}
-         <div className="flex justify-center md:justify-end">
-           <motion.div className={`rounded-xl border ${theme === 'dark' ? 'border-white' : 'border-black'} w-full max-w-2xl relative overflow-hidden`} style={{ height: '400px' }}>
-             <Image
-               src={theme === 'dark' ? `/images/black/feature-1.webp` : `/images/white/feature-1.webp`}
-               alt="Sample App Interface"
-               fill
-               className="object-contain"
-               sizes="(max-width: 768px) 100vw, 50vw"
-             />
-           </motion.div>
-         </div>
-      </motion.div>
-        
-  
-
-        {/* Features list */}
-        {features.map((feature, idx) => {
-          const isEven = idx % 2 === 1;
-          return (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
-            >
-                {!isEven && (
-                  <div className="flex justify-center">
-                    <motion.div className={`rounded-xl border ${theme === 'dark' ? 'border-white' : 'border-black'} w-full max-w-2xl relative overflow-hidden`} style={{ height: '400px' }}>
-                      <Image
-                        src={
-                          theme === 'dark'
-                            ? `/images/black/feature-${feature.imageIndex}.webp`
-                            : `/images/white/feature-${feature.imageIndex}.webp`
-                        }
-                        alt={feature.title}
-                        fill
-                        className="object-contain"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
-                    </motion.div>
-                  </div>
-                )}
-              <div
-                className={`text-center md:text-left ${
-                  !isEven ? 'md:pl-8' : 'md:pr-8'
-                }`}
+          {/* Right side - Sticky image frame */}
+          <div className="hidden md:block">
+            <div className="sticky top-32 h-[500px]">
+              <motion.div
+                key={activeFeatureIndex}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className={`rounded-xl border ${
+                  theme === 'dark' ? 'border-white' : 'border-black'
+                } w-full h-full relative overflow-hidden`}
               >
-                 <motion.h3
-                   className=" leading-[1.1] mb-6"
-                   style={{ fontSize: 'clamp(24px, 2.5vw, 52px)' }}
-                   initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                   animate={{ opacity: 1, scale: 1 }}
-                   transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.3 }}
-                 >
-                   <span className={`block ${
-                     theme === 'dark' ? 'text-white' : 'text-black'
-                   }`}>
-                     {feature.title}
-                   </span>
-                 </motion.h3>
-                 <p
-                   className={`text-lg leading-relaxed ${
-                     theme === 'dark' ? 'text-gray-400' : 'text-light-600'
-                   }`}
-                 >
-                   {feature.description}
-                 </p>
-              </div>
-                 {isEven && (
-                   <div className="flex justify-center">
-                     <motion.div className={`rounded-xl border ${theme === 'dark' ? 'border-white' : 'border-black'} w-full max-w-2xl relative overflow-hidden`} style={{ height: '400px' }}>
-                       <Image
-                         src={
-                           theme === 'dark'
-                             ? `/images/black/feature-${feature.imageIndex}.webp`
-                             : `/images/white/feature-${feature.imageIndex}.webp`
-                         }
-                         alt={feature.title}
-                         fill
-                         className="object-contain"
-                         sizes="(max-width: 768px) 100vw, 50vw"
-                       />
-                     </motion.div>
-                   </div>
-                 )}
-            </motion.div>
-          );
-        })}
+                <Image
+                  src={
+                    theme === 'dark'
+                      ? `/images/black/feature-${allFeatures[activeFeatureIndex].imageIndex}.webp`
+                      : `/images/white/feature-${allFeatures[activeFeatureIndex].imageIndex}.webp`
+                  }
+                  alt={allFeatures[activeFeatureIndex].title}
+                  fill
+                  className="object-contain"
+                  sizes="50vw"
+                />
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Mobile view - Show images inline */}
+          <div className="md:hidden space-y-16">
+            {allFeatures.map((feature) => (
+              <motion.div
+                key={`mobile-${feature.title}`}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                className={`rounded-xl border ${
+                  theme === 'dark' ? 'border-white' : 'border-black'
+                } w-full h-[300px] relative overflow-hidden`}
+              >
+                <Image
+                  src={
+                    theme === 'dark'
+                      ? `/images/black/feature-${feature.imageIndex}.webp`
+                      : `/images/white/feature-${feature.imageIndex}.webp`
+                  }
+                  alt={feature.title}
+                  fill
+                  className="object-contain"
+                  sizes="100vw"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
