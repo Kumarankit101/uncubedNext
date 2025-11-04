@@ -101,17 +101,17 @@ export const Features: React.FC = () => {
 
        <div className="max-w-7xl mx-auto relative space-y-20">
             {/* Video Section with Arrow */}
-            <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
-              {/* Arrow and Text on Left */}
+            <div className="relative flex justify-center items-center">
+              {/* Arrow and Text on Left - Positioned Absolutely */}
               <motion.div
-                className="flex flex-col items-center gap-4"
+                className="hidden md:flex flex-col items-center gap-4 absolute left-0 top-1/2 -translate-y-1/2"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
               >
                 <h3
-                  className={`text-xl md:text-2xl font-semibold ${
+                  className={`text-xl lg:text-2xl font-semibold whitespace-nowrap ${
                     theme === 'dark' ? 'text-white' : 'text-black'
                   }`}
                 >
@@ -122,21 +122,38 @@ export const Features: React.FC = () => {
                   alt="Arrow pointing to video"
                   width={120}
                   height={80}
-                  className={`${theme === 'dark' ? 'invert' : ''} rotate-0 md:rotate-0`}
+                  className={`${theme === 'dark' ? 'invert' : ''}`}
                 />
               </motion.div>
 
-              {/* YouTube Video */}
+              {/* Text for Mobile - Above Video */}
+              <motion.div
+                className="md:hidden mb-6"
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <h3
+                  className={`text-xl text-center font-semibold ${
+                    theme === 'dark' ? 'text-white' : 'text-black'
+                  }`}
+                >
+                  uncubed in 1 minute
+                </h3>
+              </motion.div>
+
+              {/* YouTube Video - Centered */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="w-full md:w-auto"
+                className="w-full max-w-4xl"
               >
                 <iframe
                   src="https://www.youtube-nocookie.com/embed/At8lvPFbYIo"
-                  className="w-full md:w-[640px] lg:w-[800px] aspect-video rounded-2xl border-none"
+                  className="w-full aspect-video rounded-2xl border-none mx-auto"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   title="Uncubed Demo"
