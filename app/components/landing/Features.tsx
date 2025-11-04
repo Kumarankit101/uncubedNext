@@ -222,7 +222,7 @@ export const Features: React.FC = () => {
 
           {/* Right side - Sticky image frame */}
           <div className="hidden md:block">
-            <div className="sticky top-32">
+            <div className="sticky top-1/2 -translate-y-1/2">
               <motion.div
                 key={activeFeatureIndex}
                 initial={{ opacity: 0, scale: 0.95 }}
