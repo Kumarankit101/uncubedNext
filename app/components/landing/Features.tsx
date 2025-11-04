@@ -149,11 +149,13 @@ export const Features: React.FC = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="w-full max-w-4xl"
+                className={`w-full max-w-4xl border-2 rounded-3xl p-4 ${
+                  theme === 'dark' ? 'border-white' : 'border-black'
+                }`}
               >
                 <iframe
                   src="https://www.youtube-nocookie.com/embed/At8lvPFbYIo"
-                  className="w-full aspect-video rounded-2xl border-none mx-auto"
+                  className="w-full aspect-video rounded-2xl border-none"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   title="Uncubed Demo"
