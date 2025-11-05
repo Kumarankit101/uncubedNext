@@ -2,10 +2,14 @@ import type { NextConfig } from "next";
 import withBundleAnalyzer from '@next/bundle-analyzer';
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
   experimental: { optimizePackageImports: ['lucide-react'] },
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: false,
   },
   webpack: (config) => {
     config.resolve.fallback = {

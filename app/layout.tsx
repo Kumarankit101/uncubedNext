@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import "./globals.css";
 import { RootProviders } from "./root-providers";
 
-const inter = Inter({
-  subsets: ["latin"],
-});
+// Temporarily using system fonts until Phase 7 font optimization
+// const inter = Inter({
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://uncubed.me'),
@@ -66,7 +67,9 @@ export const metadata: Metadata = {
 // Rendering Strategy Documentation:
 // - Public routes: SSR/ISR/SSG for SEO-critical pages (/, /privacy, /terms, /shared/result/[type]/[id])
 // - Protected routes: CSR for interactivity (client components with React Query)
-// - No global force-dynamic; per-route revalidate as needed
+// - Temporarily using force-dynamic to fix build issue, will optimize per-route in Phase 2
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -75,7 +78,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} antialiased`}
+        className="font-sans antialiased"
       >
         <RootProviders>
           {children}
