@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useState, Suspense } from 'react';
 import { useApiClient } from '@/lib/useApiClient';
 import { Download, ExternalLink } from 'lucide-react';
@@ -5,13 +7,12 @@ import { Button } from '@/app/components/ui/Button';
 import { useThemeStore } from '@/lib/store/themeStore';
 import dynamic from 'next/dynamic';
 
+// Load react-pdf CSS styles (client-side only to prevent build issues)
+import '@/lib/react-pdf-styles';
+
 // Dynamically import react-pdf components to reduce initial bundle size
 const Document = dynamic(() => import('react-pdf').then(mod => ({ default: mod.Document })), { ssr: false });
 const Page = dynamic(() => import('react-pdf').then(mod => ({ default: mod.Page })), { ssr: false });
-
-// Import CSS statically since dynamic CSS import is not supported
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
 
 // IndexedDB helpers for PDF caching
 const DB_NAME = 'pdfCache';

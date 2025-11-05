@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import { AlertCircle, Home, ArrowLeft } from 'lucide-react';
 
+// Force dynamic rendering to prevent prerender issues
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+
 export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">

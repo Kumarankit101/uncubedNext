@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { AlertCircle, Home, RotateCcw } from 'lucide-react';
 
+// Force dynamic rendering to prevent prerender issues with dependencies
+export const dynamic = 'force-dynamic';
+
 export default function Error({
   error,
   reset,
