@@ -8,21 +8,51 @@ if (!API_URL) {
 }
 
 export const TAGS = {
+  // Public data
   PUBLIC_RESULT: 'public-result',
   PUBLIC_COMPETITOR: 'public-competitor',
+
+  // User data
+  USER: (userId: string) => `user:${userId}`,
+  USER_CREDITS: (userId: string) => `user-credits:${userId}`,
+  USER_BILLING: (userId: string) => `user-billing:${userId}`,
+  USER_SETTINGS: (userId: string) => `user-settings:${userId}`,
+
+  // Projects
   PROJECTS: 'projects',
   PROJECT: (id: string) => `project:${id}`,
+  PROJECT_RESULTS: (projectId: string) => `project-results:${projectId}`,
+
+  // Agents
   AGENTS: 'agents',
+  AGENT: (id: string) => `agent:${id}`,
+  AGENT_RUN: (runId: string) => `agent-run:${runId}`,
+
+  // Plans & Billing
   CREDITS: 'credits',
   PLANS: 'plans',
+
+  // Startup specific
+  STARTUP: (id: string) => `startup:${id}`,
+  STARTUP_DETAILS: (id: string) => `startup-details:${id}`,
 } as const;
 
 export const DEFAULT_REVALIDATE = {
-  plans: 60 * 30, // 30m
-  agents: 60 * 10, // 10m
-  publicResult: 60 * 5, // 5m
-  competitorList: 60 * 5, // 5m
-  projects: 60, // 1m
+  // Static/semi-static data (longer cache)
+  plans: 60 * 30, // 30 minutes
+  agents: 60 * 10, // 10 minutes
+  publicResult: 60 * 5, // 5 minutes
+  competitorList: 60 * 5, // 5 minutes
+
+  // User-specific data (shorter cache)
+  projects: 60, // 1 minute
+  credits: 60 * 2, // 2 minutes
+  userSettings: 60 * 5, // 5 minutes
+  billing: 60 * 10, // 10 minutes
+
+  // Real-time data (very short cache)
+  startupDetails: 30, // 30 seconds
+  agentRun: 30, // 30 seconds
 } as const;
 
 export type FetchOptions = {

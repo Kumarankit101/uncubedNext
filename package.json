@@ -25,6 +25,7 @@
     "react-markdown": "^10.1.0",
     "react-pdf": "^7.7.1",
     "remark-gfm": "^4.0.1",
+    "schema-dts": "^1.1.5",
     "uuid": "^10.0.0",
     "zustand": "^4.5.0"
   },
