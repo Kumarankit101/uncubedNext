@@ -215,7 +215,13 @@ export default function DashboardClient({ initialAgents, initialProjects }: Dash
             projectId: project.id,
             agentId: agentId,
             inputData: {
-              description: `startupName: ${editedDraft.startupName}\n\n idea: ${appIdea}\n\ntargetMarket: ${editedDraft.targetMarket}`
+              description: JSON.stringify({
+                startupName: editedDraft.startupName,
+                idea: appIdea,
+                targetMarket: editedDraft.targetMarket,
+                problem: editedDraft.problem,
+                solution: editedDraft.solution
+              })
             }
           });
         } catch (error) {

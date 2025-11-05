@@ -65,8 +65,14 @@ export default function Agents() {
         projectId: projectId,
         agentId: agentId,
         inputData: {
-          description: input,
-          projectContext: selectedProject?.startupIdea
+          description: JSON.stringify({
+            startupName: selectedProject?.startupName,
+            idea: selectedProject?.startupIdea,
+            problem: selectedProject?.problem,
+            solution: selectedProject?.solution,
+            targetMarket: selectedProject?.targetMarket,
+            additionalInstruction: input
+          })
         }
       });
 

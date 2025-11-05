@@ -94,17 +94,11 @@ export const AgentModal: React.FC<AgentModalProps> = ({
             <label className={`block text-sm font-medium mb-2 ${
               theme === 'dark' ? 'text-gray-300' : 'text-light-700'
             }`}>
-              Describe what you want to analyze for this project
+              Additional Instructions
             </label>
             <textarea
-              {...register('input', {
-                required: 'Please describe what you want to analyze',
-                // minLength: {
-                //   value: 20,
-                //   message: 'Please provide at least 20 characters of detail'
-                // }
-              })}
-              placeholder={`Describe what aspects of "${projectTitle}" you want to analyze with ${agent.name}...`}
+              {...register('input')}
+              placeholder={`Describe what aspects of "${projectTitle}" you want to achieve with ${agent.name}...`}
               className={`w-full px-4 py-3 rounded-xl h-32 resize-none ${
                 theme === 'dark'
                   ? 'bg-white/[0.05] border border-white/[0.08] text-white placeholder-gray-400'
