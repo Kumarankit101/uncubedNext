@@ -40,7 +40,7 @@ export const inter = localFont({
   display: 'swap', // FOUT instead of FOIT for better perceived performance
   preload: true,
   fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif'],
-  adjustFontFallback: true, // Minimize layout shift
+   adjustFontFallback: 'Arial', // Minimize layout shift
 });
 
 /**

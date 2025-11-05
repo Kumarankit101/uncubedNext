@@ -92,8 +92,8 @@ export function getEnv(): Env {
     REVALIDATION_SECRET: process.env.REVALIDATION_SECRET!,
     NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
     NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,
-    NEXT_PUBLIC_ENABLE_ANALYTICS: process.env.NEXT_PUBLIC_ENABLE_ANALYTICS,
-    NEXT_PUBLIC_ENABLE_DEBUG: process.env.NEXT_PUBLIC_ENABLE_DEBUG,
+    NEXT_PUBLIC_ENABLE_ANALYTICS: process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === 'true' ? 'true' : process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === 'false' ? 'false' : undefined,
+    NEXT_PUBLIC_ENABLE_DEBUG: process.env.NEXT_PUBLIC_ENABLE_DEBUG === 'true' ? 'true' : process.env.NEXT_PUBLIC_ENABLE_DEBUG === 'false' ? 'false' : undefined,
   };
 }
 
