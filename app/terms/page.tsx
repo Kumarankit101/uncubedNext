@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 
+// Force static generation - content rarely changes
+export const dynamic = 'force-static';
+// Revalidate once per day to pick up any content updates
 export const revalidate = 86400;
 
 export const metadata: Metadata = {

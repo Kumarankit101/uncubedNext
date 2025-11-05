@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { aiAgents } from '@/lib/data/aiAgents';
+// TODO Phase 5: Replace wildcard import with icon map for tree-shaking
+// Dynamic icon lookup based on database agent.icon property
 import * as Icons from 'lucide-react';
 
 interface AgentSelectorProps {

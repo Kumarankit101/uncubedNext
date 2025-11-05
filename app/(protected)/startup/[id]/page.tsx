@@ -23,6 +23,8 @@ import {
 import { Button } from '@/app/components/ui/Button';
 import { Card } from '@/app/components/ui/Card';
 import { aiAgents } from '@/lib/data/aiAgents';
+// TODO Phase 5: Replace wildcard import with icon map for tree-shaking
+// Dynamic icon lookup based on database agent.icon property
 import * as Icons from 'lucide-react';
 import { useAgents } from '@/lib/hooks/useAgents';
 import { useApiClient } from '@/lib/useApiClient';
