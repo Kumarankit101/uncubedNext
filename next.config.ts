@@ -2,8 +2,12 @@ import type { NextConfig } from "next";
 import withBundleAnalyzer from '@next/bundle-analyzer';
 
 const nextConfig: NextConfig = {
-  output: 'standalone',
-  experimental: { optimizePackageImports: ['lucide-react'] },
+  // Output mode - server for dynamic pages
+  // This prevents static export which is causing error page prerendering issues
+  output: undefined,
+  experimental: {
+    optimizePackageImports: ['lucide-react'],
+  },
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
@@ -18,8 +22,6 @@ const nextConfig: NextConfig = {
     };
     return config;
   },
-  // Disable static generation completely to handle dynamic Clerk/React Query requirements
-  // output: 'stan/dalone',
   images: {
     remotePatterns: [
       {
