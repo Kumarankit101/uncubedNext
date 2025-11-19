@@ -86,13 +86,13 @@ const PitchDeckGeneratorResult = React.memo<PitchDeckGeneratorResultProps>(({
   const [numPages, setNumPages] = useState<number>();
 
   // Set up PDF.js worker
-  // useEffect(() => {
-  //   const setupPdfJs = async () => {
-  //     const { pdfjs } = await import('react-pdf');
-  //     pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
-  //   };
-  //   setupPdfJs();
-  // }, []);
+  useEffect(() => {
+    const setupPdfJs = async () => {
+      const { pdfjs } = await import('react-pdf');
+      pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
+    };
+    setupPdfJs();
+  }, []);
 
   // Step 1: Get SAS URL from backend
   useEffect(() => {
