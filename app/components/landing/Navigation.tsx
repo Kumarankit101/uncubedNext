@@ -112,7 +112,7 @@ export const Navigation = React.memo(() => {
           : 'bg-transparent border-b border-gray-600/10'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.div
@@ -178,32 +178,32 @@ export const Navigation = React.memo(() => {
           {/* Mobile menu button - Enhanced visibility and touch target */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`md:hidden relative p-4 rounded-xl backdrop-blur-sm transition-all duration-200 group touch-manipulation ${
+            className={`md:hidden relative p-3 sm:p-4 rounded-xl backdrop-blur-sm transition-all duration-200 group touch-manipulation ${
               theme === 'dark'
                 ? 'bg-white/10 border-2 border-white/30 hover:bg-white/20 hover:border-white/50'
                 : 'bg-light-200/50 border-2 border-light-400/50 hover:bg-light-300/50 hover:border-light-500/50'
             }`}
             style={{
-              minWidth: '48px',
-              minHeight: '48px',
+              minWidth: '44px',
+              minHeight: '44px',
               WebkitTapHighlightColor: 'transparent'
             }}
             aria-label="Toggle mobile menu"
           >
-            <div className="relative w-6 h-6 flex items-center justify-center">
+             <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
               <motion.div
                 animate={{ rotate: isOpen ? 180 : 0 }}
                 transition={{ duration: 0.2 }}
               >
-                {isOpen ? (
-                  <X className={`w-6 h-6 drop-shadow-lg ${
-                    theme === 'dark' ? 'text-white' : 'text-gray-900'
-                  }`} strokeWidth={2.5} />
-                ) : (
-                  <Menu className={`w-6 h-6 drop-shadow-lg ${
-                    theme === 'dark' ? 'text-white' : 'text-gray-900'
-                  }`} strokeWidth={2.5} />
-                )}
+                 {isOpen ? (
+                   <X className={`w-5 h-5 sm:w-6 sm:h-6 drop-shadow-lg ${
+                     theme === 'dark' ? 'text-white' : 'text-gray-900'
+                   }`} strokeWidth={2.5} />
+                 ) : (
+                   <Menu className={`w-5 h-5 sm:w-6 sm:h-6 drop-shadow-lg ${
+                     theme === 'dark' ? 'text-white' : 'text-gray-900'
+                   }`} strokeWidth={2.5} />
+                 )}
               </motion.div>
             </div>
             {/* Enhanced visual indicator */}
@@ -221,7 +221,7 @@ export const Navigation = React.memo(() => {
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="md:hidden overflow-hidden"
         >
-          <div className={`py-6 space-y-2 backdrop-blur-md rounded-b-2xl mt-2 ${
+          <div className={`py-4 sm:py-6 space-y-1 sm:space-y-2 backdrop-blur-md rounded-b-2xl mt-2 ${
             theme === 'dark'
               ? 'bg-black/80 border-t border-white/10'
               : 'bg-light-50/90 border-t border-light-300/20'
@@ -239,13 +239,13 @@ export const Navigation = React.memo(() => {
                   duration: 0.2
                 }}
                 onClick={() => isOnLanding ? scrollToSection(item.href) : navigateToLandingSection(item.href)}
-                className={`block w-full text-left transition-all duration-200 font-medium py-3 px-6 rounded-lg mx-2 touch-manipulation ${
+                className={`block w-full text-left transition-all duration-200 font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-lg mx-2 touch-manipulation ${
                   theme === 'dark'
                     ? 'text-gray-300 hover:text-white hover:bg-white/10'
                     : 'text-light-600 hover:text-light-900 hover:bg-light-200/30'
                 }`}
                 style={{
-                  minHeight: '48px',
+                  minHeight: '44px',
                   WebkitTapHighlightColor: 'transparent'
                 }}
               >
@@ -253,7 +253,7 @@ export const Navigation = React.memo(() => {
               </motion.button>
             ))}
 
-            <div className={`flex flex-col gap-3 pt-4 px-4 ${
+            <div className={`flex flex-col gap-2 sm:gap-3 pt-3 sm:pt-4 px-4 ${
               theme === 'dark'
                 ? 'border-t border-white/10'
                 : 'border-t border-light-300/20'
@@ -285,18 +285,18 @@ export const Navigation = React.memo(() => {
                    duration: 0.2
                  }}
                >
-                  <Button
-                    variant="glass"
-                    size="md"
-                    className="w-full touch-manipulation"
-                    style={{
-                      minHeight: '48px',
-                      WebkitTapHighlightColor: 'transparent'
-                    }}
-                    onClick={handleSignIn}
-                  >
-                    Sign In
-                  </Button>
+                   <Button
+                     variant="glass"
+                     size="md"
+                     className="w-full touch-manipulation"
+                     style={{
+                       minHeight: '44px',
+                       WebkitTapHighlightColor: 'transparent'
+                     }}
+                     onClick={handleSignIn}
+                   >
+                     Sign In
+                   </Button>
                </motion.div>
 
                <motion.div
@@ -310,18 +310,18 @@ export const Navigation = React.memo(() => {
                    duration: 0.2
                  }}
                >
-                  <Button
-                    variant="primary"
-                    size="md"
-                    className="w-full touch-manipulation"
-                    style={{
-                      minHeight: '48px',
-                      WebkitTapHighlightColor: 'transparent'
-                    }}
-                    onClick={handleSignUp}
-                  >
-                    Get Started
-                  </Button>
+                   <Button
+                     variant="primary"
+                     size="md"
+                     className="w-full touch-manipulation"
+                     style={{
+                       minHeight: '44px',
+                       WebkitTapHighlightColor: 'transparent'
+                     }}
+                     onClick={handleSignUp}
+                   >
+                     Get Started
+                   </Button>
                </motion.div>
             </div>
           </div>

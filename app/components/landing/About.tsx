@@ -38,7 +38,7 @@ export const About: React.FC = () => {
   const { theme } = useThemeStore();
 
   return (
-    <section id="about" className="py-32 px-6 relative">
+    <section id="about" className="py-20 sm:py-32 px-4 sm:px-6 relative">
       {/* Clean background that starts and ends with black */}
       <div className="absolute inset-0">
         {/* Start with black from pricing */}
@@ -92,9 +92,9 @@ export const About: React.FC = () => {
           viewport={{ once: true }}
           className="px-8 md:px-16 py-16"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
             {/* Left Column: Mission */}
-            <div className="space-y-6 md:px-12">
+            <div className="space-y-6 px-4 lg:px-12">
               <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center">
                     <Rocket className={`w-5 h-5 ${theme === 'dark' ? 'text-green-400' : 'text-green-500'}`} />
@@ -113,13 +113,13 @@ export const About: React.FC = () => {
             </div>
 
             {/* Right Column: Values */}
-             <div className={`space-y-8 md:border-l md:px-12 ${
-               theme === 'dark' ? 'border-green-400/70' : 'border-green-500/90'
+             <div className={`space-y-8 px-4 lg:px-12 ${
+               theme === 'dark' ? 'lg:border-l lg:border-green-400/70' : 'lg:border-l lg:border-green-500/90'
              }`}>
               <h3 className={`text-xl md:text-2xl font-bold ${
                 theme === 'dark' ? 'text-white' : 'text-light-900'
               }`}>Our Values</h3>
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                 {values.map((value, index) => {
                   const Icon = value.icon;
                   return (

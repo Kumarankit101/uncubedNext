@@ -51,7 +51,7 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-32 px-6 relative">
+    <section id="contact" className="py-20 sm:py-32 px-4 sm:px-6 relative">
       <div className="absolute inset-0">
         <div className={`absolute top-0 left-0 right-0 h-32 bg-gradient-to-b ${
           theme === 'dark' ? 'from-black' : 'from-light-50'
@@ -105,11 +105,11 @@ export const Contact: React.FC = () => {
           viewport={{ once: true }}
           className="max-w-2xl mx-auto"
         >
-          <div className={`backdrop-blur-sm p-8 border shadow-xl transition-all duration-200 ${
+          <div className={`backdrop-blur-sm p-6 sm:p-8 border shadow-xl transition-all duration-200 ${
             theme === 'dark'
               ? 'bg-white/[0.03] border-white/[0.08]'
               : 'bg-light-100/50 border-light-300/20'
-          }`} style={{ borderRadius: '30px', boxShadow: theme === 'dark' ? '0 0 15px rgba(255,255,255,0.15)' : undefined }}>
+          }`} style={{ borderRadius: '20px sm:rounded-[30px]', boxShadow: theme === 'dark' ? '0 0 15px rgba(255,255,255,0.15)' : undefined }}>
             <div className="mb-8">
               <h3 className={`text-xl font-bold mb-2 ${
                 theme === 'dark' ? 'text-white' : 'text-light-900'
@@ -137,7 +137,7 @@ export const Contact: React.FC = () => {
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className={`block text-sm font-medium mb-2 ${
                       theme === 'dark' ? 'text-gray-300' : 'text-light-700'
@@ -181,7 +181,7 @@ export const Contact: React.FC = () => {
                   </div>
                  </div>
 
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                    <div>
                      <label className={`block text-sm font-medium mb-2 ${
                        theme === 'dark' ? 'text-gray-300' : 'text-light-700'

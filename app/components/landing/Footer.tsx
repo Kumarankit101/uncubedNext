@@ -44,7 +44,7 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className={`relative py-20 px-6 ${
+    <footer className={`relative py-12 sm:py-20 px-4 sm:px-6 ${
       theme === 'dark'
         ? 'border-t border-white/10'
         : 'border-t border-gray-300/30'
@@ -57,7 +57,7 @@ export const Footer: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto relative">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-8 lg:mb-12">
           {/* Brand section */}
           <div className="lg:col-span-4">
             <div className="flex items-center gap-3 mb-6">
@@ -103,7 +103,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Links sections */}
-          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-8">
             {Object.entries(footerSections).map(([title, links]) => (
               <div key={title}>
                 <h3 className={`${

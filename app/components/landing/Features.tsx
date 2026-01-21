@@ -69,7 +69,7 @@ export const Features: React.FC = () => {
   };
 
   return (
-    <section id="features" className="py-32 px-6 relative">
+    <section id="features" className="py-20 sm:py-32 px-4 sm:px-6 relative">
       {/* Background matching Hero section colors */}
       <div className="absolute inset-0">
         {/* Start with black from hero */}
@@ -182,12 +182,12 @@ export const Features: React.FC = () => {
             </div>
 
         {/* Gap between video and features */}
-        <div className="h-32" />
+        <div className="h-16 sm:h-32" />
 
-        {/* Scroll-linked Features Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 relative">
-          {/* Left side - Scrolling text content */}
-          <div className="space-y-32">
+         {/* Scroll-linked Features Section */}
+         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 relative">
+           {/* Left side - Scrolling text content */}
+           <div className="space-y-16 lg:space-y-32">
             {allFeatures.map((feature, idx) => (
               <motion.div
                 key={feature.title}
@@ -198,8 +198,8 @@ export const Features: React.FC = () => {
                 }}
                 onViewportEnter={() => setActiveFeatureIndex(idx)}
                 transition={{ duration: 0.5 }}
-                viewport={{ once: false, amount: 0.5 }}
-                className="min-h-[400px] flex flex-col justify-center"
+                 viewport={{ once: false, amount: 0.5 }}
+                 className="min-h-[300px] sm:min-h-[400px] flex flex-col justify-center"
               >
                 <motion.h2
                   className="leading-[1.1] mb-6"
@@ -259,7 +259,7 @@ export const Features: React.FC = () => {
           </div>
 
           {/* Mobile view - Show images inline */}
-          <div className="md:hidden space-y-16">
+          <div className="lg:hidden space-y-8 sm:space-y-16">
             {allFeatures.map((feature) => (
               <motion.div
                 key={`mobile-${feature.title}`}

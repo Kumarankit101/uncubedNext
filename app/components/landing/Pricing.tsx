@@ -31,7 +31,7 @@ const floatingElements = [
   const planIcons = [ Rocket, Star,Crown,];
 
   return (
-    <section id="pricing" className="py-32 px-6 relative">
+    <section id="pricing" className="py-20 sm:py-32 px-4 sm:px-6 relative">
       {/* Clean background that starts and ends with black - matching CTA section */}
       <div className="absolute inset-0">
         {/* Start with black from features */}
@@ -137,7 +137,7 @@ const floatingElements = [
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
               viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12"
             >
               {plans.map((plan, index) => {
                 const Icon = planIcons[index] || Zap;
@@ -150,7 +150,7 @@ const floatingElements = [
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
                     viewport={{ once: true }}
-                      className={`flex flex-col p-6 backdrop-blur-sm transition-all duration-300 group relative overflow-hidden rounded-[30px] hover:rounded-none transition-border-radius duration-300 ease-in-out hover:scale-105 ${
+                       className={`flex flex-col p-4 sm:p-6 backdrop-blur-sm transition-all duration-300 group relative overflow-hidden rounded-[20px] sm:rounded-[30px] hover:rounded-none transition-border-radius duration-300 ease-in-out hover:scale-105 ${
                          theme === 'dark'
                           ? 'bg-white/[0.05] border border-white/[0.12] hover:bg-white/[0.08] hover:border-white/[0.2] shadow-lg hover:shadow-white/10 hover:shadow-2xl hover:shadow-blue-500/20'
                           : 'bg-white/[0.15] border-gray-300/90 hover:bg-white/[0.2] hover:border-gray-400/90 shadow-xl hover:shadow-gray-300/40 hover:shadow-2xl hover:shadow-blue-500/20'

@@ -79,7 +79,7 @@ export const Hero = React.memo(() => {
   const canGetStarted = idea.trim().length > 0;
 
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center px-6 pt-20">
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20">
       {/* Clean Background */}
       <motion.div
         style={{ y, opacity, willChange: 'transform' }}
@@ -110,8 +110,8 @@ export const Hero = React.memo(() => {
   
 
         <motion.h1
-          className=" leading-[1.1] mb-6"
-          style={{ fontSize: 'clamp(46px, 6vw, 82px)', marginTop: '80px' }}
+          className="leading-[1.1] mb-6 px-2"
+          style={{ fontSize: 'clamp(36px, 8vw, 82px)', marginTop: '60px' }}
           initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.3 }}
@@ -130,7 +130,7 @@ export const Hero = React.memo(() => {
         
         {/* Simple subheading */}
         <motion.p
-          className={`text-lg md:text-lg max-w-4xl mx-auto leading-relaxed mb-12 ${
+          className={`text-base sm:text-lg max-w-4xl mx-auto leading-relaxed mb-8 px-4 ${
             theme === 'dark' ? 'text-gray-300' : 'text-light-600'
           }`}
           initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -151,35 +151,35 @@ export const Hero = React.memo(() => {
           transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.8 }}
           className="mb-12"
         >
-            <div className="mx-auto" style={{ maxWidth: '720px' }}>
+            <div className="mx-auto px-4" style={{ maxWidth: '720px' }}>
             <div className="relative">
 
 
-               <div className={`relative p-8 border shadow-xl transition-all duration-200 ${
+               <div className={`relative p-4 sm:p-8 border shadow-xl transition-all duration-200 ${
                  theme === 'dark'
                    ? 'bg-[#0A0A0A] backdrop-blur-sm border-white/20 focus-within:border-white shadow-black/20'
                    : 'bg-white/90 backdrop-blur-sm border-gray-200/60 focus-within:border-black shadow-gray-200/60'
-               }`} style={{ height: '220px', borderRadius: '30px', boxShadow: theme === 'dark' ? '0 0 15px rgba(255,255,255,0.15)' : undefined }}>
+               }`} style={{ height: '200px', borderRadius: '24px', boxShadow: theme === 'dark' ? '0 0 15px rgba(255,255,255,0.15)' : undefined }}>
                 <div className="relative">
-                  <textarea
-                    ref={textareaRef}
-                    value={idea}
-                    onChange={(e) => setIdea(e.target.value)}
-                    placeholder="The more detailed your description, the better our AI can help "
-                      className={`textarea-scroll w-full px-2 py-2 pr-20 bg-transparent text-base resize-none focus:outline-none leading-relaxed transition-colors ${
-                        theme === 'dark'
-                          ? 'text-white placeholder-gray-400 focus:text-white'
-                          : 'text-gray-900 placeholder-gray-500 focus:text-gray-900'
-                      }`}
+                   <textarea
+                     ref={textareaRef}
+                     value={idea}
+                     onChange={(e) => setIdea(e.target.value)}
+                     placeholder="The more detailed your description, the better our AI can help "
+                       className={`textarea-scroll w-full px-2 py-2 pr-16 sm:pr-20 bg-transparent text-sm sm:text-base resize-none focus:outline-none leading-relaxed transition-colors ${
+                         theme === 'dark'
+                           ? 'text-white placeholder-gray-400 focus:text-white'
+                           : 'text-gray-900 placeholder-gray-500 focus:text-gray-900'
+                       }`}
                      style={{
-                       height: '60px',
+                       height: '50px',
                        wordWrap: 'break-word',
                        whiteSpace: 'pre-wrap',
                        overflowY: 'auto'
 
                      }}
-                    rows={8}
-                  />
+                     rows={8}
+                   />
                   
                    {/* Simple submit button */}
                    <button
@@ -195,14 +195,14 @@ export const Hero = React.memo(() => {
     : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                      }`}
                        style={{
-                         bottom: '7px',
-                         right: '-3px',
-                         width: '50px',
-                         height: '50px',
-                         borderRadius: '25px'
+                         bottom: '5px',
+                         right: '2px',
+                         width: '40px',
+                         height: '40px',
+                         borderRadius: '20px'
                        }}
                    >
-                      <ArrowRight className={`w-8 h-8 transition-transform duration-200 ${
+                      <ArrowRight className={`w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-200 ${
                         canGetStarted ? 'group-hover:translate-x-0.5' : 'text-[#0A0A0A]'
                       }`} />
                    </button>
@@ -234,8 +234,8 @@ export const Hero = React.memo(() => {
           transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.7 }}
           className="mb-8"
         >
-          <div className="max-w-3xl mx-auto">
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="max-w-3xl mx-auto px-4">
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                {landingAgents.map((agent, index) => {
                  const isSelected = selectedAgents.includes(agent.id);
                 
